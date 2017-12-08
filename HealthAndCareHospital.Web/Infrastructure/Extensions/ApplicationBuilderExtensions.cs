@@ -17,51 +17,59 @@
             {
                 serviceScope.ServiceProvider.GetService<HealthAndCareHospitalDbContext>().Database.Migrate();
 
-                var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
-                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-
-                Task
-                    .Run(async () =>
-                    {
-                        var adminName = WebConstants.AdministratorRole;
-
-                        var roles = new[]
-                        {
-                            adminName,
-                            WebConstants.DoctorRole
-                        };
-
-                        foreach (var role in roles)
-                        {
-                            var roleExists = await roleManager.RoleExistsAsync(role);
-
-                            if (!roleExists)
-                            {
-                                await roleManager.CreateAsync(new IdentityRole
-                                {
-                                    Name = role
-                                });
-                            }
-                        }
-
-                        var adminEmail = "admin@admin.com";
-
-                        var adminUser = await userManager.FindByEmailAsync(adminEmail);
-
-                        if (adminUser == null)
-                        {
-                            adminUser = new User
-                            {
-                                Email = adminEmail,
-                                UserName = adminName
-                            };
-
-                            await userManager.CreateAsync(adminUser, "Admin@2");
-
-                            await userManager.AddToRoleAsync(adminUser, adminName);
-                        }
-                    })
-                    .Wait();
+               var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+               var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+               
+               Task
+                   .Run(async () =>
+                   {
+                       var roleName = "Administrator";
+               
+                       var roleExists = await roleManager.RoleExistsAsync(roleName);
+               
+                       if (!roleExists)
+                       {
+                           await roleManager.CreateAsync(new IdentityRole
+                           {
+                               Name = roleName
+                           });
+               
+                           await roleManager.CreateAsync(new IdentityRole
+                           {
+                               Name = "Doctor"
+                           });
+                       }
+               
+                       var adminEmail = "admin@admin.bg";
+                       var doctorEmail = "doctor@doctor.bg";
+               
+                       var adminUserExists = await userManager.FindByNameAsync(adminEmail);
+                       var doctorUserExists = await userManager.FindByNameAsync(doctorEmail);
+               
+                       if (doctorUserExists == null)
+                       {
+                           doctorUserExists = new User
+                           {
+                               Email = doctorEmail,
+                               UserName = doctorEmail
+                           };
+               
+                           await userManager.CreateAsync(doctorUserExists, "Doctor@2");
+                           await userManager.AddToRoleAsync(doctorUserExists, "Doctor");
+                       }
+                       if (adminUserExists == null)
+                       {
+                           adminUserExists = new User
+                           {
+                               Email = adminEmail,
+                               UserName = adminEmail
+                           };
+               
+                           await userManager.CreateAsync(adminUserExists, "Admin@2");
+                           await userManager.AddToRoleAsync(adminUserExists, roleName);
+                       }
+                   })
+               .Wait();
             }
 
             return app;

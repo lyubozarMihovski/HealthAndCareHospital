@@ -9,6 +9,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using HealthAndCareHospital.Data;
     using HealthAndCareHospital.Data.Models;
+    using HealthAndCareHospital.Web.Infrastructure.Extensions;
 
     public class Startup
     {
@@ -37,6 +38,8 @@
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDatabaseMigration();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
