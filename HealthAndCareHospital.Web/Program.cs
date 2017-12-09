@@ -1,4 +1,4 @@
-﻿namespace HealthAndCareHospital.Web
+﻿namespace HealthAndCareHospital.Common
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;

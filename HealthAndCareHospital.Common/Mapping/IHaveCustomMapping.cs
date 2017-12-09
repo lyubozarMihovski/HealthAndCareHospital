@@ -1,4 +1,4 @@
-﻿namespace HealthAndCareHospital.Web.Infrastructure.Mapping
+﻿namespace HealthAndCareHospital.Common.Mapping
 {
     using AutoMapper;
 

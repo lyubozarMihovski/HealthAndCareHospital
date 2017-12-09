@@ -1,0 +1,15 @@
+﻿@model ContactFormServiceModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<p class="white">@Model.Name</p>
+<p class="white">@Model.Email</p>
+<p class="white">@Model.Subject</p>
+<br>
+<h3>Message</h3>
+<p class="white">@Model.Message</p>
+<br>
+<a class="btn btn-primary" asp-action="All">Back to List</a>

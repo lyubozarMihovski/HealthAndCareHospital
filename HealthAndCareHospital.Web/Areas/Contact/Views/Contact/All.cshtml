@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ContactFormServiceModel>
+@{
+    ViewData["Title"] = "All";
+}
+
+<h2>All</h2>
+<table class="table-bordered white">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th class="text-center">
+                Is this message seen
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var contact in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @contact.Name
+                </td>
+                <td class="text-center">
+                    @contact.Email
+                </td>
+                <td class="text-center">
+                    @contact.Subject
+                </td>
+                <td class="text-center">
+                    @(contact.IsSeen ? "Yes" : "No")
+                    </td>
+                <td class="text-center">
+                    <a class="btn btn-danger" href="/Contact/Contact/Details/@contact.Id">See Detailed Contact</a>
+
+
+                    <a class="btn btn-danger" href="/Contact/Contact/Delete/@contact.Id">Delete Contact</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

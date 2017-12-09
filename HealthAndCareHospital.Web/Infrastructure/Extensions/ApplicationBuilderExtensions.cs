@@ -1,4 +1,4 @@
-﻿namespace HealthAndCareHospital.Web.Infrastructure.Extensions
+﻿namespace HealthAndCareHospital.Common.Infrastructure.Extensions
 {
     using HealthAndCareHospital.Data;
     using Data.Models;
@@ -23,7 +23,7 @@
                Task
                    .Run(async () =>
                    {
-                       var roleName = "Administrator";
+                       var roleName = WebConstants.AdministratorRole;
                
                        var roleExists = await roleManager.RoleExistsAsync(roleName);
                
@@ -36,7 +36,7 @@
                
                            await roleManager.CreateAsync(new IdentityRole
                            {
-                               Name = "Doctor"
+                               Name = WebConstants.DoctorRole
                            });
                        }
                
@@ -55,7 +55,7 @@
                            };
                
                            await userManager.CreateAsync(doctorUserExists, "Doctor@2");
-                           await userManager.AddToRoleAsync(doctorUserExists, "Doctor");
+                           await userManager.AddToRoleAsync(doctorUserExists, WebConstants.DoctorRole);
                        }
                        if (adminUserExists == null)
                        {

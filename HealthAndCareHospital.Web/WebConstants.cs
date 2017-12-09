@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HealthAndCareHospital.Web
+namespace HealthAndCareHospital.Common
 {
     public class WebConstants
     {

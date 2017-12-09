@@ -13,7 +13,8 @@
         public string Name { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [MinLength(10)]
+        [MaxLength(10)]
         public string EGN { get; set; }
 
         [Required]

@@ -1,4 +1,4 @@
-﻿namespace HealthAndCareHospital.Web
+﻿namespace HealthAndCareHospital.Common
 {
     using AutoMapper;
     using Microsoft.AspNetCore.Builder;
@@ -9,7 +9,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using HealthAndCareHospital.Data;
     using HealthAndCareHospital.Data.Models;
-    using HealthAndCareHospital.Web.Infrastructure.Extensions;
+    using HealthAndCareHospital.Common.Infrastructure.Extensions;
 
     public class Startup
     {
@@ -32,6 +32,8 @@
                 .AddDefaultTokenProviders();
 
             services.AddAutoMapper();
+
+            services.AddDomainServices();
 
             services.AddMvc();
         }
@@ -57,6 +59,11 @@
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

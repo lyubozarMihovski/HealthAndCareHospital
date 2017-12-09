@@ -24,11 +24,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HealthAndCareHospital.Common\HealthAndCareHospital.Common.csproj" />
     <ProjectReference Include="..\HealthAndCareHospital.Data\HealthAndCareHospital.Data.csproj" />
+    <ProjectReference Include="..\HealthAndCareHospital.Services\HealthAndCareHospital.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Filters\" />
+    <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Contact\Models\" />
+    <Folder Include="Areas\Doctor\Controllers\" />
+    <Folder Include="Areas\Doctor\Data\" />
+    <Folder Include="Areas\Doctor\Models\" />
+    <Folder Include="Areas\Doctor\Views\" />
   </ItemGroup>
 
 </Project>

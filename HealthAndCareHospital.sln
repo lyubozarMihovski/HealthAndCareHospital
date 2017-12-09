@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthAndCareHospital.Web", "HealthAndCareHospital.Web\HealthAndCareHospital.Web.csproj", "{D3855AD2-1166-4369-BE33-07128B08C538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthAndCareHospital.Web", "HealthAndCareHospital.Web\HealthAndCareHospital.Web.csproj", "{D3855AD2-1166-4369-BE33-07128B08C538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthAndCareHospital.Data", "HealthAndCareHospital.Data\HealthAndCareHospital.Data.csproj", "{5B3E731C-4C4F-47F9-A068-5DA507C8C62F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthAndCareHospital.Data", "HealthAndCareHospital.Data\HealthAndCareHospital.Data.csproj", "{5B3E731C-4C4F-47F9-A068-5DA507C8C62F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthAndCareHospital.Services", "HealthAndCareHospital.Services\HealthAndCareHospital.Services.csproj", "{AFC3C2EB-3BA2-4125-B3F0-3D6D865AF26C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthAndCareHospital.Common", "HealthAndCareHospital.Common\HealthAndCareHospital.Common.csproj", "{54788878-27E5-4D62-AEE3-527E256FB80E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{5B3E731C-4C4F-47F9-A068-5DA507C8C62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3E731C-4C4F-47F9-A068-5DA507C8C62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3E731C-4C4F-47F9-A068-5DA507C8C62F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFC3C2EB-3BA2-4125-B3F0-3D6D865AF26C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC3C2EB-3BA2-4125-B3F0-3D6D865AF26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC3C2EB-3BA2-4125-B3F0-3D6D865AF26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC3C2EB-3BA2-4125-B3F0-3D6D865AF26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54788878-27E5-4D62-AEE3-527E256FB80E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54788878-27E5-4D62-AEE3-527E256FB80E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54788878-27E5-4D62-AEE3-527E256FB80E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54788878-27E5-4D62-AEE3-527E256FB80E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

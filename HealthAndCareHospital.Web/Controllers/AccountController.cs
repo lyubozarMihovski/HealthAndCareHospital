@@ -1,5 +1,5 @@
 ﻿
-namespace HealthAndCareHospital.Web.Controllers
+namespace HealthAndCareHospital.Common.Controllers
 {
     using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Data.Models.AccountViewModels;

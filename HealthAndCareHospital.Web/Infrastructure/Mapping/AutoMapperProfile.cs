@@ -1,6 +1,7 @@
-﻿namespace HealthAndCareHospital.Web.Infrastructure.Mapping
+﻿namespace HealthAndCareHospital.Common.Infrastructure.Mapping
 {
     using AutoMapper;
+    using HealthAndCareHospital.Common.Mapping;
     using System;
     using System.Linq;
 

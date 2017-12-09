@@ -1,17 +1,99 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<h1>@TempData["Message"]</h1>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<!--contact-->
+<section id="contact" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="ser-title white">Contact us</h2>
+                <hr class="botm-line">
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <h3>Contact Info</h3>
+                <div class="space"></div>
+                <p class="white"><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>321 Awesome Street<br> Sofia, Sf 1000</p>
+                <div class="space"></div>
+                <p class="white"><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>healthandcare@gmail.com</p>
+                <div class="space"></div>
+                <p class="white"><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+359 888 123 123</p>
+            </div>
+            <div class="col-md-8 col-sm-8 marb20">
+                <div class="contact-info">
+                    <h3 class="cnt-ttl">Having Any Query! Or Book an appointment</h3>
+                    <div class="space"></div>
+                    <div id="sendmessage">Your message has been sent. Thank you!</div>
+                    <div id="errormessage"></div>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <form asp-controller="Contact" asp-action="Create" method="post" role="form" class="contactForm">
+                        <div class="form-group">
+                            <input required type="text" name="Name" class="form-control br-radius-zero" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <input required type="email" class="form-control br-radius-zero" name="Email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <input required type="text" class="form-control br-radius-zero" name="Subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea required class="form-control br-radius-zero" name="Message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                            <div class="validation"></div>
+                        </div>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+                        <div class="form-action">
+                            <button type="submit" class="btn btn-form">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ contact-->
+
+<svg height="130" width="500">
+    <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:rgb(0,153,255);stop-opacity:1" />
+            <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    <ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+    <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">HCH</text>
+    Sorry, your browser does not support inline SVG.
+</svg>
+
+
+<style>
+    #map {
+        height: 300px;
+        width: 50%;
+    }
+</style>
+
+<h3>My Google Maps Demo</h3>
+<div id="map"></div>
+<script>
+    function initMap() {
+        var uluru = { lat: 42.6977, lng: 23.3219 };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: uluru
+        });
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE7bNAi0HxSaD30BKwHfiiNCmy_hJiUjc&callback=initMap">
+</script>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

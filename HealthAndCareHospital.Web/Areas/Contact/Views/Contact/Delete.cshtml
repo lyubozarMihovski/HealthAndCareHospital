@@ -1,0 +1,15 @@
+﻿@model ContactFormServiceModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+<br>
+<h3>Are you sure you want to deete this?</h3>
+<br>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-default" />
+    <br>
+</form>
+<a class="btn btn-primary" asp-action="All">Back to List</a>
