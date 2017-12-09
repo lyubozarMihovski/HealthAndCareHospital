@@ -37,40 +37,11 @@
                         </div>
                         <div class="collapse navbar-collapse navbar-right" id="myNavbar">
                             <ul class="nav navbar-nav">
-                                @if (this.User.IsInRole("Administrator"))
-                                {
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="Admin" asp-controller="Department" asp-action="All">Departments</a></li>
-                                    <li class="active"><a asp-area="Admin" asp-controller="Doctor" asp-action="All">Doctors</a></li>
-                                    <li class="active"><a asp-area="Admin" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="Admin" asp-controller="Medicine" asp-action="All">Medicines</a></li>
-                                    <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="All">Patients</a></li>
-                                    <li class="active"><a asp-area="Contact" asp-controller="Contact" asp-action="All">Contacts</a></li>
-                                }
-                                @if (this.User.IsInRole("Doctor"))
-                                {
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
-                                    <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="ByDoctorIdAsync">Patients</a></li>
-                                    <li class="active"><a asp-area="Doctor" asp-controller="Receipt" asp-action="ByDoctorIdAsync">Patients</a></li>
-                                    <li class="active"><a asp-area="Contact" asp-controller="Contact" asp-action="All">Contacts</a></li>
-                                }
-                                @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Administrator") && !this.User.IsInRole("Doctor"))
-                                {
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Department" asp-action="All">Departments</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                                }
-                                @if (!this.User.Identity.IsAuthenticated)
-                                {
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                                }
+                                <li class="active"><a href="#banner">Home</a></li>
+                                <li class="active"><a href="#service">Services</a></li>
+                                <li class="active"><a href="#about">About</a></li>
+                                <li class="active"><a href="#testimonial">Testimonial</a></li>
+                                <li class="active"><a href="#contact">Contact</a></li>
                             </ul>
                             @await Html.PartialAsync("_LoginPartial")
                         </div>
@@ -109,9 +80,9 @@
                         </div>
                         <div class="info-sec">
                             <ul class="quick-info">
-                                <li><a href="#"><i class="fa fa-circle"></i>Home</a></li>
-                                <li><a href="/department/all"><i class="fa fa-circle"></i>Services</a></li>
-                                <li><a href="/home/contact"><i class="fa fa-circle"></i>Appointment</a></li>
+                                <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
+                                <li><a href="#service"><i class="fa fa-circle"></i>Service</a></li>
+                                <li><a href="#contact"><i class="fa fa-circle"></i>Appointment</a></li>
                             </ul>
                         </div>
                     </div>
@@ -121,10 +92,10 @@
                         </div>
                         <div class="info-sec">
                             <ul class="social-icon">
-                                <li class="bglight-blue"><a href="https://web.facebook.com/"><i class="fa fa-facebook btn"></i></a></li>
-                                <li class="bgred"><a href="https://plus.google.com/discover"><i class="fa fa-google-plus btn"></i></a></li>
-                                <li class="bgdark-blue"><a href="https://www.linkedin.com/"><i class="fa fa-linkedin btn"></i></a></li>
-                                <li class="bglight-blue"><a href="https://twitter.com/"><i class="fa fa-twitter btn"></i></a></li>
+                                <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                                <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                                <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                                <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
                             </ul>
 
                         </div>

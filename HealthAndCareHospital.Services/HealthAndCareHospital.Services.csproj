@@ -14,9 +14,4 @@
     <ProjectReference Include="..\HealthAndCareHospital.Data\HealthAndCareHospital.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Admin\" />
-    <Folder Include="Models\Doctor\" />
-  </ItemGroup>
-
 </Project>

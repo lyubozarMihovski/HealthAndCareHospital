@@ -1,9 +1,11 @@
 ﻿namespace HealthAndCareHospital.Services.Models.Contact
 {
+    using HealthAndCareHospital.Common.Mapping;
     using HealthAndCareHospital.Data;
+    using HealthAndCareHospital.Data.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class ContactFormServiceModel
+    public class ContactFormServiceModel : IMapFrom<Contact>
     {
         public int Id { get; set; }
 

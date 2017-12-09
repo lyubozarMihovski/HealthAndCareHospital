@@ -1,5 +1,6 @@
 ﻿namespace HealthAndCareHospital.Services.Implementations
 {
+    using AutoMapper.QueryableExtensions;
     using System.Collections.Generic;
     using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Services.Models.Contact;
@@ -20,16 +21,9 @@
         public async Task<IEnumerable<ContactFormServiceModel>> All()
         {
             var contacts = await this.db.
-                Contacts.
-                Select(c => new ContactFormServiceModel
-                {
-                    Name = c.Name,
-                    Id = c.Id,
-                    Email = c.Email,
-                    Subject = c.Subject,
-                    Message = c.Message,
-                    IsSeen = c.IsSeen
-                })
+                Contacts
+                .OrderByDescending(c => c.Id)
+                .ProjectTo<ContactFormServiceModel>()
                 .ToListAsync();
 
             return contacts;
