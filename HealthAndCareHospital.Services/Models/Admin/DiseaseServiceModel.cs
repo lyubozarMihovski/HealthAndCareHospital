@@ -1,26 +1,27 @@
 ﻿namespace HealthAndCareHospital.Services.Models.Admin
 {
+    using AutoMapper;
     using HealthAndCareHospital.Common.Mapping;
     using HealthAndCareHospital.Data;
     using HealthAndCareHospital.Data.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class DepartmentCreateServiceModel : IMapFrom<Department>
+    public class DiseaseServiceModel
     {
         public int Id { get; set; }
 
         [Required]
-        [MinLength(DataConstants.DepartmentNameMinLength)]
-        [MaxLength(DataConstants.DepartmentNameMaxLength)]
+        [MinLength(DataConstants.DiseaseNameMinLength)]
+        [MaxLength(DataConstants.DiseaseNameMaxLength)]
         public string Name { get; set; }
 
         [Required]
-        [MinLength(DataConstants.DepartmentNameMinLength)]
-        [MaxLength(DataConstants.DepartmentDescriptionMaxLength)]
+        [MinLength(DataConstants.DiseaseDescriptionMinLength)]
+        [MaxLength(DataConstants.DiseaseDescriptionMaxLength)]
         public string Description { get; set; }
 
-        [Required]
-        [Url]
-        public string ImageURL { get; set; }
+        public int DepartmentId { get; set; }
+
+        public string DepartmentName { get; set; }
     }
 }

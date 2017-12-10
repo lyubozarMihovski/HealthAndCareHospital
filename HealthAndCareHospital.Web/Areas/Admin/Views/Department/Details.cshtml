@@ -1,0 +1,35 @@
+﻿@model DepartmentCreateServiceModel
+@{
+    ViewData["Title"] = "Details";
+}
+<h2>Details</h2>
+<br>
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="dl-horizontal white">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageURL)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+    <br>
+    <a class="btn btn-primary" asp-action="All">Back to List</a>
+</div>

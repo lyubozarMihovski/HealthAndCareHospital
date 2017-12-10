@@ -23,6 +23,6 @@
         [Url]
         public string ImageURL { get; set; }
 
-        public List<DoctorViewModel> Doctors { get; set; }
+        public List<DoctorIdNameModel> Doctors { get; set; }
     }
 }

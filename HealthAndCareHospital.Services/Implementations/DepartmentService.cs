@@ -1,15 +1,15 @@
-﻿using HealthAndCareHospital.Data;
-using HealthAndCareHospital.Data.Models;
-using System.Threading.Tasks;
-using HealthAndCareHospital.Services.Models.Admin;
-using System.Collections.Generic;
-using System.Linq;
-using HealthAndCareHospital.Services.Models.Doctor;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
-
-namespace HealthAndCareHospital.Services.Implementations
+﻿namespace HealthAndCareHospital.Services.Implementations
 {
+    using HealthAndCareHospital.Data;
+    using HealthAndCareHospital.Data.Models;
+    using System.Threading.Tasks;
+    using HealthAndCareHospital.Services.Models.Admin;
+    using System.Collections.Generic;
+    using System.Linq;
+    using HealthAndCareHospital.Services.Models.Doctor;
+    using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
+
     public class DepartmentService : IDepartmentService
     {
         private readonly HealthAndCareHospitalDbContext db;
@@ -19,9 +19,9 @@ namespace HealthAndCareHospital.Services.Implementations
             this.db = db;
         }
 
-        public async Task<IEnumerable<DepartmentViewModel>> All()
+        public IEnumerable<DepartmentViewModel> All()
         {
-            var departments = await this.db.Departments.Select(d =>  new DepartmentViewModel
+            var departments = this.db.Departments.Select(d =>  new DepartmentViewModel
             {
                 Id = d.Id,
                 Name = d.Name,
@@ -29,10 +29,14 @@ namespace HealthAndCareHospital.Services.Implementations
                 ImageURL = d.ImageURL,
                 Doctors = this.db.Doctors
                 .Where(doc => doc.DepartmentId == d.Id)
-                .ProjectTo<DoctorViewModel>()
+                .Select(doc => new DoctorIdNameModel
+                {
+                    Id = doc.Id,
+                    Name = doc.Name
+                })
                 .ToList()
             })
-              .ToListAsync();
+            .ToList();
             return departments;
         }
 
@@ -46,6 +50,50 @@ namespace HealthAndCareHospital.Services.Implementations
             };
             this.db.Add(department);
             await this.db.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+           var department = await this.db.Departments
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            this.db.Departments.Remove(department);
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<bool> DepartmentExists(int id)
+        {
+            return await this.db.Departments.AnyAsync(e => e.Id == id);
+        }
+
+        public async Task<DepartmentCreateServiceModel> Details(int departmentId)
+        {
+            var department = await this.db.Departments
+                 .Where(d => d.Id == departmentId)
+                 .ProjectTo<DepartmentCreateServiceModel>()
+                 .FirstOrDefaultAsync();
+
+            return department;
+        }
+
+        public async Task Edit(int id, string name, string description, string imageURL)
+        {
+            var department = await this.db.Departments
+                 .Where(d => d.Id == id).FirstOrDefaultAsync();
+
+            department.Name = name;
+            department.Description = description;
+            department.ImageURL = imageURL;
+
+            await this.db.SaveChangesAsync();
+        }
+
+        public async Task<Department> FindByName(string departmentName)
+        {
+            return await this.db
+                .Departments
+                .Where(d => d.Name == departmentName.ToLower())
+                .FirstOrDefaultAsync();
         }
     }
 }

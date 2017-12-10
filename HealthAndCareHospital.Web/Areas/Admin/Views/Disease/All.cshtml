@@ -1,0 +1,55 @@
+﻿@model DiseaseListingModel
+@{
+    ViewData["Title"] = "All Diseases";
+}
+<h2>@ViewData["Title"]</h2>
+<div class="col-md-2">
+    <a class="btn btn-success" asp-action="Create">Create Disease</a>
+</div>
+<div class="row">
+    <form asp-action="Search">
+        <div class="col-md-6">
+            <input asp-for="SearchText" class="form-control pull-right" placeholder="Search">
+        </div>
+        <div class="col-md-2">
+            <input type="submit" class="btn btn-default" value="Search">
+        </div>
+    </form>
+</div>
+<table class="table white">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Department Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DiseaseListing)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a class="btn btn-default" href="/departments/all/">@item.DepartmentName</a>
+                </td>
+                <td>
+                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

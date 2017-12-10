@@ -1,0 +1,17 @@
+﻿@model DoctorIdNameModel
+@{
+    ViewData["Title"] = "SetToRole";
+}
+
+<h2>SetToRole</h2>
+<br>
+<form asp-action="SetToRole" method="post">
+    <input type="hidden" asp-for="Id">
+    <div class="form-group">
+        <input type="submit" value="Set To Role" class="btn btn-success" />
+    </div>
+    <br>
+    <div>
+        <a class="btn btn-primary" asp-action="All">Back to List</a>
+    </div>
+</form>
