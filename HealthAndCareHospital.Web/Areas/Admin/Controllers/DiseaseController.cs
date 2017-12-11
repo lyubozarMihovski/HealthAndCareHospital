@@ -11,8 +11,11 @@
     using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
+    using Microsoft.AspNetCore.Authorization;
+    using HealthAndCareHospital.Common;
 
     [Area("Admin")]
+    [Authorize(Roles = WebConstants.AdministratorRole)]
     public class DiseaseController : Controller
     {
         private readonly IDepartmentService departmentService;
@@ -24,6 +27,7 @@
             this.departmentService = departmentService;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var diseases = await this.diseaseService.All();
@@ -36,8 +40,13 @@
             return View(diseasesModel);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Search(DiseaseListingModel model)
         {
+            if (String.IsNullOrWhiteSpace(model.SearchText))
+            {
+                return RedirectToAction(nameof(All));
+            }
 
             var diseases = await this.diseaseService.Search(model);
 

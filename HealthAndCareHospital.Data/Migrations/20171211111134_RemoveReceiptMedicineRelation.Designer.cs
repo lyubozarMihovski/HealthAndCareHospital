@@ -11,9 +11,10 @@ using System;
 namespace HealthAndCareHospital.Data.Migrations
 {
     [DbContext(typeof(HealthAndCareHospitalDbContext))]
-    partial class HealthAndCareHospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171211111134_RemoveReceiptMedicineRelation")]
+    partial class RemoveReceiptMedicineRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

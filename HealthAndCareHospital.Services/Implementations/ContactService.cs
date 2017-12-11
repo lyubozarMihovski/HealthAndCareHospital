@@ -20,13 +20,11 @@
 
         public async Task<IEnumerable<ContactFormServiceModel>> All()
         {
-            var contacts = await this.db.
+            return await this.db.
                 Contacts
                 .OrderByDescending(c => c.Id)
                 .ProjectTo<ContactFormServiceModel>()
                 .ToListAsync();
-
-            return contacts;
         }
 
         public async Task CreateAsync(string name, string email, string subject, string message)
@@ -47,6 +45,7 @@
         {
             var contact = await this.FindByIdAsync(id);
             contact.IsSeen = true;
+
             await this.db.SaveChangesAsync();
 
             var model = new ContactFormServiceModel

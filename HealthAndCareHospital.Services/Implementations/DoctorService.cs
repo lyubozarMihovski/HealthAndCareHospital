@@ -59,6 +59,7 @@
                 .FirstOrDefault()
                 .Doctors
                 .Add(doctor);
+
             await db.SaveChangesAsync();
         }
 
@@ -115,20 +116,25 @@
 
         public async Task Delete(int id)
         {
-           var doctor = await this.db.Doctors
+            var doctor = await this.db.Doctors
                 .SingleOrDefaultAsync(m => m.Id == id);
-            db.Doctors.Remove(doctor);
+
+            this.db.Doctors.Remove(doctor);
             await this.db.SaveChangesAsync();
         }
 
         public async Task<bool> SetToRoleAsync(int id)
         {
             var doctorUser = await this.GetDoctorById(id);
-            var user = await this.db.Users.Where(u => u.Email == doctorUser.Email).FirstOrDefaultAsync();
+            var user = await this.db.Users
+                .Where(u => u.Email == doctorUser.Email)
+                .FirstOrDefaultAsync();
+
             if (user == null)
             {
                 return false;
             }
+
             await this.userManager.AddToRoleAsync(user, "Doctor");
             return true;
         }

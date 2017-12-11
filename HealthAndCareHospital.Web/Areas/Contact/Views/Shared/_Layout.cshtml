@@ -52,8 +52,8 @@
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                                     <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
                                     <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
-                                    <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="ByDoctorIdAsync">Patients</a></li>
-                                    <li class="active"><a asp-area="Doctor" asp-controller="Receipt" asp-action="ByDoctorIdAsync">Patients</a></li>
+                                    <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="All">Patients</a></li>
+                                    <li class="active"><a asp-area="Doctor" asp-controller="Receipt" asp-action="All">Receipts</a></li>
                                     <li class="active"><a asp-area="Contact" asp-controller="Contact" asp-action="All">Contacts</a></li>
                                 }
                                 @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Administrator") && !this.User.IsInRole("Doctor"))

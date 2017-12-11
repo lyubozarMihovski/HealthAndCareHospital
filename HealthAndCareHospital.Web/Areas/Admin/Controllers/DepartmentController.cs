@@ -1,11 +1,14 @@
 ﻿namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
 {
+    using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
     [Area("Admin")]
+    [Authorize(Roles = WebConstants.AdministratorRole)]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentService departmentService;
@@ -15,11 +18,13 @@
             this.departmentService = departmentService;
         }
 
+        [AllowAnonymous]
         public IActionResult All()
         {
             var departments = this.departmentService.All();
             return View(departments);
         }
+
         public IActionResult Create()
         {
             return View();
@@ -32,11 +37,13 @@
             if (ModelState.IsValid)
             {
                 await this.departmentService.
-                    CreateAsync(model.Name, model.Description, model.ImageURL); 
+                    CreateAsync(model.Name, model.Description, model.ImageURL);
+
                 return RedirectToAction(nameof(All));
             }
             return View(model);
         }
+
         public async Task<IActionResult> Details(int id)
         {
             var department = await this.departmentService.DepartmentExists(id);
@@ -50,6 +57,7 @@
 
             return View(departmentDetails);
         }
+
         public async Task<IActionResult> Delete(int id)
         {
             var department = await this.departmentService.DepartmentExists(id);

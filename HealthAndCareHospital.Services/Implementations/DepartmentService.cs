@@ -21,7 +21,7 @@
 
         public IEnumerable<DepartmentViewModel> All()
         {
-            var departments = this.db.Departments.Select(d =>  new DepartmentViewModel
+            return this.db.Departments.Select(d =>  new DepartmentViewModel
             {
                 Id = d.Id,
                 Name = d.Name,
@@ -37,7 +37,6 @@
                 .ToList()
             })
             .ToList();
-            return departments;
         }
 
         public async Task CreateAsync(string name, string description, string imageURL)
@@ -48,6 +47,7 @@
                 Description = description,
                 ImageURL = imageURL
             };
+
             this.db.Add(department);
             await this.db.SaveChangesAsync();
         }
@@ -68,12 +68,10 @@
 
         public async Task<DepartmentCreateServiceModel> Details(int departmentId)
         {
-            var department = await this.db.Departments
+            return await this.db.Departments
                  .Where(d => d.Id == departmentId)
                  .ProjectTo<DepartmentCreateServiceModel>()
                  .FirstOrDefaultAsync();
-
-            return department;
         }
 
         public async Task Edit(int id, string name, string description, string imageURL)

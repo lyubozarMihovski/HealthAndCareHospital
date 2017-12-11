@@ -10,6 +10,7 @@
 
     [Area("Contact")]
     [Authorize(Roles = WebConstants.AdministratorRole)]
+    [Authorize(Roles = WebConstants.DoctorRole)]
     public class ContactController : Controller
     {
         private readonly IContactService contactService;

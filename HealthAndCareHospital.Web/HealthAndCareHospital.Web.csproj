@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Admin\Models\DepartmentViewModel.cs" />
     <Compile Remove="Models\User.cs" />
   </ItemGroup>
 
@@ -31,12 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Contact\Models\" />
-    <Folder Include="Areas\Doctor\Controllers\" />
-    <Folder Include="Areas\Doctor\Data\" />
     <Folder Include="Areas\Doctor\Models\" />
-    <Folder Include="Areas\Doctor\Views\" />
   </ItemGroup>
 
 </Project>

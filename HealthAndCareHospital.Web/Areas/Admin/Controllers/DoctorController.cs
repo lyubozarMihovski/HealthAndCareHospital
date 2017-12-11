@@ -1,11 +1,14 @@
 ﻿namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
 {
+    using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Doctor;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
     [Area("Admin")]
+    [Authorize(Roles = WebConstants.AdministratorRole)]
     public class DoctorController : Controller
     {
         private readonly IDoctorService doctorService;
@@ -23,7 +26,6 @@
 
         public IActionResult Create()
         {
-
             return View();
         }
 
@@ -40,6 +42,8 @@
 
             return View(model);
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var doctor = await this.doctorService.DoctorExists(id);
@@ -52,6 +56,7 @@
 
             return View(doc);
         }
+
         public async Task<IActionResult> Edit(int id)
         {
             var doctor = await this.doctorService.DoctorExists(id);
@@ -84,6 +89,7 @@
 
             return View(model);
         }
+
         public async Task<IActionResult> Delete(int id)
         {
             var doctor = await this.doctorService.DoctorExists(id);

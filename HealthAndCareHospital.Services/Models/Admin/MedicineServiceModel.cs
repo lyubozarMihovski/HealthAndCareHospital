@@ -1,8 +1,11 @@
-﻿namespace HealthAndCareHospital.Data.Models
+﻿namespace HealthAndCareHospital.Services.Models.Admin
 {
+    using HealthAndCareHospital.Common.Mapping;
+    using HealthAndCareHospital.Data;
+    using HealthAndCareHospital.Data.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class Medicine
+    public class MedicineServiceModel : IMapFrom<Medicine>
     {
         public int Id { get; set; }
 

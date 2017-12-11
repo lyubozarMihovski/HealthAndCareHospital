@@ -41,14 +41,18 @@
                 DepartmentId = department.Id,
                 Department = department
             };
+
+            department.Diseases.Add(disease);
             this.db.Diseases.Add(disease);
             await this.db.SaveChangesAsync();
         }
 
         public async Task Delete(int id)
         {
-            var disease = await db.Diseases.SingleOrDefaultAsync(m => m.Id == id);
-            db.Diseases.Remove(disease);
+            var disease = await db.Diseases
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+            this.db.Diseases.Remove(disease);
             await db.SaveChangesAsync();
         }
 
@@ -88,16 +92,15 @@
 
         public async Task<Disease> FindById(int id)
         {
-            var disease = await this.db.Diseases
+            return await this.db.Diseases
                 .Where(d => d.Id == id)
                 .FirstOrDefaultAsync();
-            return disease;
         }
 
         public async Task<IEnumerable<DiseaseServiceModel>> Search(DiseaseListingModel model)
         {
             return await this.db.Diseases
-                .OrderByDescending(d => d.Id)
+                .OrderBy(d => d.Name)
                 .Where(d => d.Name.ToLower()
                 .Contains(model.SearchText.ToLower()))
                 .Select(d => new DiseaseServiceModel

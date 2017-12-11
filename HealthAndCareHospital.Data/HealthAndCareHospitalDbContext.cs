@@ -47,11 +47,6 @@
               .WithOne(p => p.Doctor)
               .HasForeignKey(p => p.DoctorId);
 
-            builder.Entity<Receipt>()
-                .HasMany(r => r.Medicines)
-                .WithOne(m => m.Receipt)
-                .HasForeignKey(m => m.ReceiptId);
-
             base.OnModelCreating(builder);
         }
     }

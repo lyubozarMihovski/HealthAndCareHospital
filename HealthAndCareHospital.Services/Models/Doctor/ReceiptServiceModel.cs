@@ -1,9 +1,8 @@
-﻿namespace HealthAndCareHospital.Data.Models
+﻿namespace HealthAndCareHospital.Services.Models.Doctor
 {
     using System;
-    using System.Collections.Generic;
 
-    public class Receipt
+    public class ReceiptServiceModel
     {
         public int Id { get; set; }
 
@@ -12,7 +11,5 @@
         public DateTime DateTime { get; set; }
 
         public int DoctorId { get; set; }
-
-        public Doctor Doctor { get; set; }
     }
 }
