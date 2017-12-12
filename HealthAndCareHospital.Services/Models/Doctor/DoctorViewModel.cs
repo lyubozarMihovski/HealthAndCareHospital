@@ -28,6 +28,7 @@
         [Url]
         public string ImageURL { get; set; }
 
+        [Display(Name = "Department Name")]
         public string DepartmentName { get; set; }
 
         public void ConfigureMapping(Profile mapper)

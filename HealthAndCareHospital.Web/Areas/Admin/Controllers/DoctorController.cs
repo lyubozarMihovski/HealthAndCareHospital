@@ -36,14 +36,18 @@
             if (ModelState.IsValid)
             {
                 await this.doctorService
-                    .CreateAsync(model.Name, model.Email, model.ImageURL, model.Speciality, model.DepartmentName);
+                    .CreateAsync(model.Name,
+                    model.Email,
+                    model.ImageURL,
+                    model.Speciality,
+                    model.DepartmentName);
+
                 return RedirectToAction(nameof(All));
             }
 
             return View(model);
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var doctor = await this.doctorService.DoctorExists(id);

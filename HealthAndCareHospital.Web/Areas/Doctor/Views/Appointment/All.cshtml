@@ -1,15 +1,12 @@
-﻿@model IEnumerable<HealthAndCareHospital.Data.Models.Receipt>
+﻿@model IEnumerable<ReceiptServiceModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Appointments";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<h2>@ViewData["Title"]</h2>
+<br>
+<table class="table white">
     <thead>
         <tr>
                 <th>
@@ -19,7 +16,7 @@
                     @Html.DisplayNameFor(model => model.DateTime)
                 </th>
             <th>
-                @Html.DisplayNameFor(model => model.Doctor)
+                Doctor
             </th>
             <th></th>
         </tr>
@@ -34,12 +31,11 @@
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Doctor.Email)
+                <a class="btn btn-primary" asp-area="" asp-controller="Departments"
+                   asp-action="DoctorDetails" asp-route-id="@item.DoctorId">Doctor</a>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

@@ -1,14 +1,13 @@
 ﻿namespace HealthAndCareHospital.Services.Implementations
 {
+    using AutoMapper.QueryableExtensions;
     using HealthAndCareHospital.Data;
     using HealthAndCareHospital.Data.Models;
-    using System.Threading.Tasks;
     using HealthAndCareHospital.Services.Models.Admin;
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
-    using HealthAndCareHospital.Services.Models.Doctor;
-    using AutoMapper.QueryableExtensions;
-    using Microsoft.EntityFrameworkCore;
+    using System.Threading.Tasks;
 
     public class MedicineService : IMedicineService
     {

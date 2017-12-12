@@ -10,8 +10,8 @@
         Task<IEnumerable<PatientServiceModel>> All();
         Task<bool> PatientExists(int id);
         Task<PatientServiceModel> Details(int id);
-        Task Create(string name, string EGN, int age, string email);
-        Task Edit(int id, string name, string EGN, int age, string email);
+        Task<bool> Create(string name, string EGN, int age, string email);
+        Task<bool> Edit(int id, string name, string EGN, int age, string email);
         Task Delete(int id);
     }
 }

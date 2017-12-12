@@ -1,16 +1,15 @@
 ﻿namespace HealthAndCareHospital.Common.Areas.Contact.Controllers
 {
-    using System.Linq;
-    using Microsoft.AspNetCore.Mvc;
-    using HealthAndCareHospital.Data;
-    using Microsoft.AspNetCore.Authorization;
+    using HealthAndCareHospital.Common.Infrastructure.Filters;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Contact;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
     [Area("Contact")]
-    [Authorize(Roles = WebConstants.AdministratorRole)]
-    [Authorize(Roles = WebConstants.DoctorRole)]
+    [Authorize(Roles = "Doctor, Administrator")]
+    [Log]
     public class ContactController : Controller
     {
         private readonly IContactService contactService;

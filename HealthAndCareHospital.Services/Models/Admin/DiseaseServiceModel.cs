@@ -22,6 +22,7 @@
 
         public int DepartmentId { get; set; }
 
+        [Display(Name = "Department Name")]
         public string DepartmentName { get; set; }
     }
 }

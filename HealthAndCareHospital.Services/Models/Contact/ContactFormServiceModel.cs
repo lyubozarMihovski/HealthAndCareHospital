@@ -25,6 +25,7 @@
         [MaxLength(DataConstants.ContactNameSubjectMaxLength)]
         public string Message { get; set; }
 
+        [Display(Name = "Is Seen")]
         public bool IsSeen { get; set; } = false;
     }
 }

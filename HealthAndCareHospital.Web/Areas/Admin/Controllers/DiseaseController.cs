@@ -1,18 +1,12 @@
 ﻿namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.EntityFrameworkCore;
-    using HealthAndCareHospital.Data;
-    using HealthAndCareHospital.Data.Models;
+    using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
     using Microsoft.AspNetCore.Authorization;
-    using HealthAndCareHospital.Common;
+    using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     [Area("Admin")]
     [Authorize(Roles = WebConstants.AdministratorRole)]
@@ -27,7 +21,6 @@
             this.departmentService = departmentService;
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var diseases = await this.diseaseService.All();
@@ -40,7 +33,6 @@
             return View(diseasesModel);
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> Search(DiseaseListingModel model)
         {
             if (String.IsNullOrWhiteSpace(model.SearchText))

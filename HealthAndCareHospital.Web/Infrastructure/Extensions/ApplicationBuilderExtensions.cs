@@ -1,12 +1,11 @@
 ﻿namespace HealthAndCareHospital.Common.Infrastructure.Extensions
 {
-    using HealthAndCareHospital.Data;
     using Data.Models;
+    using HealthAndCareHospital.Data;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
-    using System;
     using System.Threading.Tasks;
 
     public static class ApplicationBuilderExtensions

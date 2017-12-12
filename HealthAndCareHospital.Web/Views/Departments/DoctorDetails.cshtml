@@ -1,0 +1,68 @@
+﻿@model DoctorViewModel
+
+@{
+    ViewData["Title"] = "Doctor Details";
+}
+
+<h2>Doctor Details</h2>
+<br>
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <dl class="dl-horizontal white">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Speciality)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Speciality)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </dt>
+        <dd>
+            <img src="@Model.ImageURL" asp-append-version="true" width="200" height="200" />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="All">Back to Departments</a>
+</div>
+<section id="doctor-team" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="ser-title">Meet Our Doctors!</h2>
+                <hr class="botm-line">
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="thumbnail">
+                    <img src="@Model.ImageURL" alt="..." class="team-img">
+                    <div class="caption">
+                        <h3>@Model.Name</h3>
+                        <p>@Model.Speciality</p>
+                        <p>@Model.Email</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

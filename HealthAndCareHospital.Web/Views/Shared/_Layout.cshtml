@@ -12,16 +12,11 @@
     <link rel="stylesheet" type="text/css" href="~/Medilab/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/Medilab/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Medilab/css/style.css">
-    <!-- =======================================================
-      Theme Name: Medilab
-      Theme URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-      Author: BootstrapMade.com
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
+
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-    <!--banner-->
+
     <section id="banner" class="banner">
         <div class="bg-color">
             <nav class="navbar navbar-default navbar-fixed-top">
@@ -50,18 +45,18 @@
                                 @if (this.User.IsInRole("Doctor"))
                                 {
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Diseases" asp-action="All">Diseases</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Medicines" asp-action="All">Medicines</a></li>
                                     <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="All">Patients</a></li>
-                                    <li class="active"><a asp-area="Doctor" asp-controller="Receipt" asp-action="All">Receipts</a></li>
+                                    <li class="active"><a asp-area="Doctor" asp-controller="Appointment" asp-action="All">Appointments</a></li>
                                     <li class="active"><a asp-area="Contact" asp-controller="Contact" asp-action="All">Contacts</a></li>
                                 }
                                 @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Administrator") && !this.User.IsInRole("Doctor"))
                                 {
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Department" asp-action="All">Departments</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Departments" asp-action="All">Departments</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Diseases" asp-action="All">Diseases</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Medicines" asp-action="All">Medicines</a></li>
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                                 }
@@ -89,8 +84,7 @@
             </div>
         </div>
     </section>
-    <!--/ banner-->
-    <!--footer-->
+
     <footer id="footer">
         <div class="top-footer">
             <div class="container">
@@ -136,13 +130,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p>&copy; 2017 - ProjectHospital</p>
+                        <p>&copy; 2017 - Health And Care Hospital</p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-    <!--/ footer-->
+
 
     <script src="~/Medilab/js/jquery.min.js"></script>
     <script src="~/Medilab/js/jquery.easing.min.js"></script>

@@ -1,6 +1,7 @@
 ﻿namespace HealthAndCareHospital.Web.Areas.Doctor.Controllers
 {
     using HealthAndCareHospital.Common;
+    using HealthAndCareHospital.Common.Infrastructure.Filters;
     using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Doctor;
@@ -10,8 +11,7 @@
     using System.Threading.Tasks;
 
     [Area("Doctor")]
-    [Authorize(Roles = WebConstants.AdministratorRole)]
-    [Authorize(Roles = WebConstants.DoctorRole)]
+    [Authorize(Roles = "Doctor, Administrator")]
     public class PatientController : Controller
     {
         private readonly IPatientService patientService;
@@ -44,6 +44,8 @@
             return View(patient);
         }
 
+        [Authorize(Roles = WebConstants.DoctorRole)]
+        [Log]
         public IActionResult Create()
         {
             return View();
@@ -51,6 +53,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = WebConstants.DoctorRole)]
+        [Log]
         public async Task<IActionResult> Create(PatientServiceModel model)
         {
             if (!ModelState.IsValid)
@@ -58,21 +62,26 @@
                 return View(model);
             }
 
-            if (!this.User.IsInRole("Doctor"))
-            {
-                return Unauthorized();
-            }
-
             var user = await this.userManager.GetUserAsync(User);
             var email = user.Email;
 
-            await this.patientService.Create(model.Name, model.EGN, model.Age, email);
-
+            var success = await this.patientService.Create(model.Name, model.EGN, model.Age, email);
+            if (!success)
+            {
+                return BadRequest();
+            }
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = WebConstants.DoctorRole)]
+        [Log]
         public async Task<IActionResult> Edit(int id)
         {
+            if (!this.User.IsInRole(WebConstants.DoctorRole))
+            {
+                return NotFound();
+            }
+
             var patientExists = await this.patientService.PatientExists(id);
 
             if (!patientExists)
@@ -87,11 +96,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = WebConstants.DoctorRole)]
+        [Log]
         public async Task<IActionResult> Edit(PatientServiceModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }
+
+            if (!this.User.IsInRole(WebConstants.DoctorRole))
+            {
+                return Unauthorized();
             }
 
             var patientExists = await this.patientService.PatientExists(model.Id);
@@ -101,19 +117,19 @@
                 return NotFound();
             }
 
-            if (!this.User.IsInRole("Doctor") || !this.User.IsInRole("Administrator"))
-            {
-                return Unauthorized();
-            }
-
             var user = await this.userManager.GetUserAsync(User);
             var email = user.Email;
 
-            await this.patientService.Edit(model.Id, model.Name, model.EGN, model.Age, email);
+            var success = await this.patientService.Edit(model.Id, model.Name, model.EGN, model.Age, email);
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
 
+        [Log]
         public async Task<IActionResult> Delete(int id)
         {
             var patientExists = await this.patientService.PatientExists(id);
@@ -123,13 +139,14 @@
                 return NotFound();
             }
 
-            var patientDelete = this.patientService.Details(id);
+            var patientDelete = await this.patientService.Details(id);
 
             return View(patientDelete);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Log]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var patientExists = await this.patientService.PatientExists(id);

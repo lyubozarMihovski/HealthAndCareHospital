@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using HealthAndCareHospital.Data;
-using HealthAndCareHospital.Data.Models;
-using HealthAndCareHospital.Services;
-using HealthAndCareHospital.Services.Models.Admin;
-using Microsoft.AspNetCore.Authorization;
-using HealthAndCareHospital.Common;
-
-namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
+﻿namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
 {
+    using HealthAndCareHospital.Common;
+    using HealthAndCareHospital.Services;
+    using HealthAndCareHospital.Services.Models.Admin;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+
     [Area("Admin")]
     [Authorize(Roles = WebConstants.AdministratorRole)]
     public class MedicineController : Controller
@@ -25,7 +18,6 @@ namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
             this.medicineService = medicineService;
         }
 
-        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var medicines = await this.medicineService.All();
