@@ -22,7 +22,7 @@
         {
             return await this.db.Receipts
                .Where(r => r.Doctor.Email == email)
-               .OrderByDescending(r => r.Id)
+               .OrderByDescending(r => r.DateTime)
                .Select(r => new ReceiptServiceModel
                {
                    Id = r.Id,
@@ -36,7 +36,7 @@
         public async Task<IEnumerable<ReceiptServiceModel>> All()
         {
             return await this.db.Receipts
-               .OrderByDescending(r => r.Id)
+               .OrderByDescending(r => r.DateTime)
                .Select(r => new ReceiptServiceModel
                {
                    Id = r.Id,
