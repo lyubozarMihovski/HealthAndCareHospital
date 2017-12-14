@@ -36,7 +36,7 @@
                 return RedirectToAction(nameof(All));
             }
 
-            var diseases = await this.diseaseService.Search(model);
+            var diseases = await this.diseaseService.Search(model.SearchText);
 
             return View(diseases);
         }

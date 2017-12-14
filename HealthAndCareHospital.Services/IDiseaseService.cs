@@ -8,7 +8,7 @@
     public interface IDiseaseService
     {
         Task<IEnumerable<DiseaseServiceModel>> All();
-        Task<IEnumerable<DiseaseServiceModel>> Search(DiseaseListingModel model);
+        Task<IEnumerable<DiseaseServiceModel>> Search(string searchText);
         Task<bool> DiseaseExists(int id);
         Task<Disease> FindById(int id);
         Task Create(string name, string description, Department department);

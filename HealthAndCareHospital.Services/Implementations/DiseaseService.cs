@@ -20,14 +20,14 @@
         public async Task<IEnumerable<DiseaseServiceModel>> All()
         {
             return await this.db.Diseases.Select(d => new DiseaseServiceModel
-            {
-                Id = d.Id,
-                Name = d.Name,
-                Description = d.Description,
-                DepartmentId = d.DepartmentId,
-                DepartmentName = d.Department.Name
-            })
-            .ToListAsync();
+               {
+                   Id = d.Id,
+                   Name = d.Name,
+                   Description = d.Description,
+                   DepartmentId = d.DepartmentId,
+                   DepartmentName = d.Department.Name
+               })
+               .ToListAsync();
         }
 
         public async Task Create(string name, string description, Department department)
@@ -56,17 +56,15 @@
 
         public async Task<DiseaseServiceModel> Details(int id)
         {
-            var diseaseModel = await this.db.Diseases.Select(d => new DiseaseServiceModel
-            {
-                Id = d.Id,
-                Name = d.Name,
-                Description = d.Description,
-                DepartmentId = d.DepartmentId,
-                DepartmentName = d.Department.Name
-            })
-            .FirstOrDefaultAsync();
-
-            return diseaseModel;
+            return await this.db.Diseases.Select(d => new DiseaseServiceModel
+               {
+                   Id = d.Id,
+                   Name = d.Name,
+                   Description = d.Description,
+                   DepartmentId = d.DepartmentId,
+                   DepartmentName = d.Department.Name
+               })
+               .FirstOrDefaultAsync();
         }
 
         public async Task<bool> DiseaseExists(int id)
@@ -95,12 +93,12 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<DiseaseServiceModel>> Search(DiseaseListingModel model)
+        public async Task<IEnumerable<DiseaseServiceModel>> Search(string searchText)
         {
             return await this.db.Diseases
                 .OrderBy(d => d.Name)
                 .Where(d => d.Name.ToLower()
-                .Contains(model.SearchText.ToLower()))
+                .Contains(searchText.ToLower()))
                 .Select(d => new DiseaseServiceModel
                 {
                     Id = d.Id,
