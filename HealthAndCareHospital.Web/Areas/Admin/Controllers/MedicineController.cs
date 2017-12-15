@@ -3,14 +3,17 @@
     using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
+    using HealthAndCareHospital.Web.Areas.Admin.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System;
     using System.Threading.Tasks;
 
     [Area("Admin")]
     [Authorize(Roles = WebConstants.AdministratorRole)]
     public class MedicineController : Controller
     {
+        int pageSize = WebConstants.PageSize;
         private readonly IMedicineService medicineService;
 
         public MedicineController(IMedicineService medicineService)
@@ -18,10 +21,14 @@
             this.medicineService = medicineService;
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
-            var medicines = await this.medicineService.All();
-            return View(medicines);
+            return View(new MedicinePageListingModel
+            {
+                Medicines = await this.medicineService.All(page, pageSize),
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling((await this.medicineService.Total() / (double)pageSize))
+            });
         }
 
         public async Task<IActionResult> Details(int id)

@@ -18,9 +18,12 @@
             this.db = db;
         }
 
-        public async Task<IEnumerable<MedicineServiceModel>> All()
+        public async Task<IEnumerable<MedicineServiceModel>> All(int page = 1, int pageSize = 20)
         {
             return await this.db.Medicines
+                .OrderBy(m => m.Name)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ProjectTo<MedicineServiceModel>()
                 .ToListAsync();
         }
@@ -74,6 +77,11 @@
         public async Task<bool> MedicineExists(int id)
         {
             return await this.db.Medicines.AnyAsync(e => e.Id == id);
+        }
+
+        public async Task<int> Total()
+        {
+            return await this.db.Medicines.CountAsync();
         }
     }
 }
