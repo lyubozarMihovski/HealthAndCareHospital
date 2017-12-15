@@ -45,8 +45,13 @@
             }
             try
             {
-                await this.contactService
+                var success = await this.contactService
                     .CreateAsync(model.Name, model.Email, model.Subject, model.Message);
+                if (!success)
+                {
+                    return BadRequest();
+                }
+
                 TempData["Message"] = "Your contact form has been send";
                 return View();
             }

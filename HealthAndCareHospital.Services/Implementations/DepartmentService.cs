@@ -105,7 +105,7 @@
         {
             return await this.db
                 .Departments
-                .Where(d => d.Name == departmentName.ToLower())
+                .Where(d => d.Name.ToLower() == departmentName.ToLower())
                 .FirstOrDefaultAsync();
         }
     }
