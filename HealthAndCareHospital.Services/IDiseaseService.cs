@@ -11,9 +11,9 @@
         Task<IEnumerable<DiseaseServiceModel>> Search(string searchText);
         Task<bool> DiseaseExists(int id);
         Task<Disease> FindById(int id);
-        Task Create(string name, string description, Department department);
+        Task<bool> Create(string name, string description, Department department);
         Task<DiseaseServiceModel> Details(int id);
-        Task Edit(int id, string name, string description, string departmentName);
-        Task Delete(int id);
+        Task<bool> Edit(int id, string name, string description, string departmentName);
+        Task<bool> Delete(int id);
     }
 }

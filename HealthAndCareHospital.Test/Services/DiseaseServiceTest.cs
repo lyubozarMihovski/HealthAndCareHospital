@@ -21,19 +21,10 @@
             Tests.Initialize();
         }
 
-        private HealthAndCareHospitalDbContext GetDatabase()
-        {
-            var dbOptions = new DbContextOptionsBuilder<HealthAndCareHospitalDbContext>()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
-
-            return new HealthAndCareHospitalDbContext(dbOptions);
-        }
-
         [Fact]
         public async Task AllShouldReturnCorrectResultWithCorrectOrder()
         {
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
             var department = new Department { Id = 1, Name = "Gosho" };
 
             var firstDisease = new Disease { Id = 1, Name = "First", Department = department };
@@ -55,7 +46,7 @@
         [Fact]
         public async Task SearchShouldReturnCorrectResultWithCorrectOrder()
         {
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
             var department = new Department { Id = 1, Name = "Gosho" };
 
             var firstDisease = new Disease { Id = 1, Name = "First", Department = department };
@@ -80,7 +71,7 @@
         [Fact]
         public async Task DiseaseExistsShouldReturnCorrectResultTrue()
         {
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var firstDisease = new Disease { Name = "First" };
             var secondDisease = new Disease { Name = "Second" };
@@ -93,13 +84,14 @@
 
             var result = await diseaseService.DiseaseExists(1);
 
-            result.Should().Be(true);
+            result.Should()
+                .Be(true);
         }
 
         [Fact]
         public async Task FindByIdShouldReturnCorrectResultDisease()
         {
-            var db = this.GetDatabase();
+            var db = Tests.GetDatabase();
 
             var firstDisease = new Disease { Id = 1 ,Name = "First"};
             var secondDisease = new Disease { Id = 2, Name = "Second" };
@@ -117,6 +109,46 @@
 
             result.Should()
                 .BeOfType<Disease>();
+        }
+
+        [Fact]
+        public async Task CreateShouldReturnTrueAndNewDisease()
+        {
+            var db = Tests.GetDatabase();
+            var diseaseService = new DiseaseService(db);
+            var department = new Department { Id = 1, Name = "Gosho" };
+            var result = await diseaseService.Create("Name", "Description", department);
+
+            db.Diseases.Should()
+                .HaveCount(1);
+
+            result.Should()
+                .BeTrue();              
+        }
+
+        [Fact]
+        public async Task EditShouldReturnTrueAndEditedDisease()
+        {
+            var db = Tests.GetDatabase();
+            var diseaseService = new DiseaseService(db);
+            var department = new Department { Id = 1, Name = "Gosho" };            
+            var result = await diseaseService.Create("Name", "Description", department);
+            await db.SaveChangesAsync();
+            var id = await db.Diseases
+                .Where(d => d.Name == "Name")
+                .Select(d => d.Id)
+                .FirstOrDefaultAsync();
+            var edited = await diseaseService
+                .Edit(id, "EditedName", "Description", department.Name);
+
+            edited.Should()
+                .BeTrue();
+
+            db.Diseases.Should()
+                .HaveCount(1);
+
+            result.Should()
+                .BeTrue();
         }
     }
 }

@@ -36,8 +36,12 @@
         {
             if (ModelState.IsValid)
             {
-                await this.departmentService.
+                var success = await this.departmentService.
                     CreateAsync(model.Name, model.Description, model.ImageURL);
+                if (!success)
+                {
+                    return BadRequest();
+                }
 
                 return RedirectToAction(nameof(All));
             }
@@ -83,7 +87,11 @@
                 return NotFound();
             }
 
-            await this.departmentService.Delete(id);
+            var success = await this.departmentService.Delete(id);
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
@@ -118,8 +126,12 @@
                 return NotFound();
             }
 
-            await this.departmentService.Edit(model.Id,
+            var success = await this.departmentService.Edit(model.Id,
                 model.Name, model.Description, model.ImageURL);
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }

@@ -30,7 +30,7 @@
                .ToListAsync();
         }
 
-        public async Task Create(string name, string description, Department department)
+        public async Task<bool> Create(string name, string description, Department department)
         {
             var disease = new Disease
             {
@@ -40,18 +40,31 @@
                 Department = department
             };
 
+            if (disease == null)
+            {
+                return false;
+            }
+
             department.Diseases.Add(disease);
+
             this.db.Diseases.Add(disease);
             await this.db.SaveChangesAsync();
+
+            return true;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var disease = await db.Diseases
                 .SingleOrDefaultAsync(m => m.Id == id);
+            if (disease == null)
+            {
+                return false;
+            }
 
             this.db.Diseases.Remove(disease);
             await db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<DiseaseServiceModel> Details(int id)
@@ -72,9 +85,13 @@
             return await this.db.Diseases.AnyAsync(e => e.Id == id);
         }
 
-        public async Task Edit(int id, string name, string description, string departmentName)
+        public async Task<bool> Edit(int id, string name, string description, string departmentName)
         {
             var disease = await this.db.Diseases.FindAsync(id);
+            if (disease == null)
+            {
+                return false;
+            }
 
             disease.Name = name;
             disease.DepartmentId = await this.db.Departments
@@ -84,6 +101,7 @@
             disease.Description = description;
 
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<Disease> FindById(int id)

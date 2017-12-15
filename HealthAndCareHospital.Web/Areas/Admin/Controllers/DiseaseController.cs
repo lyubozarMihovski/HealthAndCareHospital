@@ -85,7 +85,11 @@
                 return NotFound();
             }
 
-            await this.diseaseService.Create(model.Name, model.Description, department);
+            var success = await this.diseaseService.Create(model.Name, model.Description, department);
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
@@ -130,7 +134,15 @@
                 return NotFound();
             }
 
-            await this.diseaseService.Edit(id, model.Name, model.Description, model.DepartmentName);
+            var success = await this.diseaseService.Edit(
+                id,
+                model.Name,
+                model.Description,
+                model.DepartmentName);
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
@@ -160,8 +172,12 @@
                 return NotFound();
             }
 
-            await this.diseaseService.Delete(id);
-           
+            var success = await this.diseaseService.Delete(id);
+            if (!success)
+            {
+                return BadRequest();
+            }
+
             return RedirectToAction(nameof(All));
         }
     }

@@ -39,7 +39,7 @@
             .ToList();
         }
 
-        public async Task CreateAsync(string name, string description, string imageURL)
+        public async Task<bool> CreateAsync(string name, string description, string imageURL)
         {
            var department = new Department
             {
@@ -47,18 +47,28 @@
                 Description = description,
                 ImageURL = imageURL
             };
+            if(department == null)
+            {
+                return false;
+            }
 
             this.db.Add(department);
             await this.db.SaveChangesAsync();
+            return true;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-           var department = await this.db.Departments
+            var department = await this.db.Departments
                 .SingleOrDefaultAsync(m => m.Id == id);
+            if (department == null)
+            {
+                return false;
+            }
 
             this.db.Departments.Remove(department);
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> DepartmentExists(int id)
@@ -74,16 +84,21 @@
                  .FirstOrDefaultAsync();
         }
 
-        public async Task Edit(int id, string name, string description, string imageURL)
+        public async Task<bool> Edit(int id, string name, string description, string imageURL)
         {
             var department = await this.db.Departments
                  .Where(d => d.Id == id).FirstOrDefaultAsync();
+            if (department == null)
+            {
+                return false;
+            }
 
             department.Name = name;
             department.Description = description;
             department.ImageURL = imageURL;
 
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<Department> FindByName(string departmentName)

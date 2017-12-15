@@ -26,11 +26,26 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Register</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
-</div>
 
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <svg height="130" width="500">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:rgb(0,153,255);stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+                <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">HCH</text>
+                Sorry, your browser does not support inline SVG.
+            </svg>
+        </section>
+    </div>
+</div>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

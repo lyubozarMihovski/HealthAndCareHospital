@@ -1,6 +1,7 @@
 ﻿namespace HealthAndCareHospital.Web.Controllers
 {
     using HealthAndCareHospital.Services;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@
             var departments = this.departmentService.All();
             return View(departments);
         }
+
+        [Authorize]
         public async Task<IActionResult> Details(int id)
         {
             var department = await this.departmentService.DepartmentExists(id);
@@ -34,6 +37,7 @@
             return View(departmentDetails);
         }
 
+        [Authorize]
         public async Task<IActionResult> DoctorDetails(int id)
         {
             var doctor = await this.doctorService.DoctorExists(id);

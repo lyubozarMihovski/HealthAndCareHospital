@@ -2,10 +2,12 @@
 {
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
+    [Authorize]
     public class DiseasesController : Controller
     {
         private readonly IDepartmentService departmentService;

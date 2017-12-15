@@ -1,9 +1,11 @@
 ﻿namespace HealthAndCareHospital.Web.Controllers
 {
     using HealthAndCareHospital.Services;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
+    [Authorize]
     public class MedicinesController : Controller
     {
         private readonly IMedicineService medicineService;
