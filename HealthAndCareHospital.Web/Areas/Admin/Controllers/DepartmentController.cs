@@ -18,7 +18,6 @@
             this.departmentService = departmentService;
         }
 
-        [AllowAnonymous]
         public IActionResult All()
         {
             var departments = this.departmentService.All();

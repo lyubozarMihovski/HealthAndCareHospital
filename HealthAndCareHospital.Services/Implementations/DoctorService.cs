@@ -30,7 +30,7 @@
             return doctors;
         }
 
-        public async Task CreateAsync(string name,
+        public async Task<bool> CreateAsync(string name,
             string email,
             string imageURL,
             string speciality,
@@ -39,6 +39,10 @@
             var department = await this.db.Departments
                    .Where(d => d.Name == departmentName)
                    .FirstOrDefaultAsync();
+            if (department == null)
+            {
+                return false;
+            }
 
             var doctor = new Doctor
             {
@@ -48,10 +52,10 @@
                 Speciality = speciality,
                 Department = department
             };
-            var user = await this.db.Users
-                .Where(u => u.Email == doctor.Email)
-                .Select(u => u.Id)
-                .FirstOrDefaultAsync();
+            if (doctor == null)
+            {
+                return false;
+            }
 
             db.Add(doctor);
             db.Departments
@@ -61,6 +65,7 @@
                 .Add(doctor);
 
             await db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<DoctorViewModel> Details(int doctorId)
@@ -81,7 +86,7 @@
             return doc;
         }
 
-        public async Task Edit(int id,
+        public async Task<bool> Edit(int id,
             string name,
             string email,
             string imageURL,
@@ -99,8 +104,13 @@
                doctor.Department = await this.db.Departments
                      .Where(d => d.Name == departmentName)
                      .FirstOrDefaultAsync();
+            if (doctor == null)
+            {
+                return false;
+            }
 
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<Doctor> GetDoctorById(int id)
@@ -114,13 +124,18 @@
             return await this.db.Doctors.AnyAsync(d => d.Id == id);
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var doctor = await this.db.Doctors
                 .SingleOrDefaultAsync(m => m.Id == id);
+            if (doctor == null)
+            {
+                return false;
+            }
 
             this.db.Doctors.Remove(doctor);
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> SetToRoleAsync(int id)

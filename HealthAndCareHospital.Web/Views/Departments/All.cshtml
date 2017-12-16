@@ -8,34 +8,10 @@
     <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Back to Home</a>
 </div>
 <br>
-<div class="col-md-12">
-    @foreach (var department in Model)
-    {
-        <div class="card col-md-4 table-bordered">
-            <img class="card-img-top img-thumbnail" src="@department.ImageURL" alt="Department Image">
-            <div class="card-body white">
-                <h3 class="card-title">@department.Name</h3>
-                <p class="card-text">@department.Description</p>
-                <h4 class="text-left">Doctors:</h4>
-                @foreach (var doctor in department.Doctors)
-                {
-                    <ul>
-                        <li>
-                            <a class="badge bg-primary" href="/departments/doctordetails/@doctor.Id">@doctor.Name</a>
-                        </li>
-                    </ul>
-                }
-            </div>
-        </div>
-    }
-</div>
-<br>
-<hr>
 <section id="doctor-team" class="section-padding">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="ser-title">Meet Our Doctors!</h2>
                 <hr class="botm-line">
             </div>
             @foreach (var department in Model)
@@ -45,7 +21,7 @@
                         <img src="@department.ImageURL" alt="..." class="team-img">
                         <div class="caption">
                             <h3>@department.Name</h3>
-                            <p>@department.Description</p>
+                            <p>@(department.Description.Substring(0 , 20))...</p>
                             <h4 class="text-left">Doctors:</h4>
                             @foreach (var doctor in department.Doctors)
                             {

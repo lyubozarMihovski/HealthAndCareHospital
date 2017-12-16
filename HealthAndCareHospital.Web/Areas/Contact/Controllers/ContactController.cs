@@ -73,8 +73,11 @@
         {
             try
             {
-               await this.contactService.DeleteAsync(id);
-             
+                var success = await this.contactService.DeleteAsync(id);
+                if (!success)
+                {
+                    return NotFound();
+                }
 
                 return RedirectToAction(nameof(All));
             }

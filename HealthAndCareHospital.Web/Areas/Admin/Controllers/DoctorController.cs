@@ -35,12 +35,16 @@
         {
             if (ModelState.IsValid)
             {
-                await this.doctorService
+                var success = await this.doctorService
                     .CreateAsync(model.Name,
                     model.Email,
                     model.ImageURL,
                     model.Speciality,
                     model.DepartmentName);
+                if (!success)
+                {
+                    return BadRequest();
+                }
 
                 return RedirectToAction(nameof(All));
             }
@@ -81,13 +85,17 @@
 
             if (ModelState.IsValid)
             {
-                await this.doctorService.Edit(model.Id,
+                var success = await this.doctorService.Edit(model.Id,
                     model.Name,
                     model.Email,
                     model.ImageURL,
                     model.Speciality,
                     model.DepartmentName);
-                
+                if (!success)
+                {
+                    return BadRequest();
+                }
+
                 return RedirectToAction(nameof(All));
             }
 
@@ -116,7 +124,11 @@
             {
                 return NotFound();
             }
-            await this.doctorService.Delete(id);
+            var success = await this.doctorService.Delete(id);
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
@@ -156,6 +168,7 @@
             {
                 TempData["Message"] = $"This {model.Name} doctor has no user!";
             }
+
             return RedirectToAction(nameof(All));
         }
     }

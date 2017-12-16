@@ -7,42 +7,6 @@
 <h2>Doctor Details</h2>
 <br>
 <div>
-    <h4>Doctor</h4>
-    <hr />
-    <dl class="dl-horizontal white">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Speciality)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Speciality)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageURL)
-        </dt>
-        <dd>
-            <img src="@Model.ImageURL" asp-append-version="true" width="200" height="200" />
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DepartmentName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DepartmentName)
-        </dd>
-    </dl>
-</div>
-<div>
     <a class="btn btn-primary" asp-action="All">Back to Departments</a>
 </div>
 <section id="doctor-team" class="section-padding">

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Controllers\UserController.cs" />
     <Compile Remove="Models\User.cs" />
   </ItemGroup>
 

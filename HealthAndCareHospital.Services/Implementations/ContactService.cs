@@ -65,15 +65,20 @@
             return model;
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var contact = this.db
                 .Contacts
                 .Where(c => c.Id == id)
                 .FirstOrDefault();
+            if (contact == null)
+            {
+                return false;
+            }
 
             this.db.Contacts.Remove(contact);
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<Contact> FindByIdAsync(int id)
