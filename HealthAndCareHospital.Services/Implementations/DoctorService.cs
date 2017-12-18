@@ -30,7 +30,7 @@
             return doctors;
         }
 
-        public async Task<bool> CreateAsync(string name,
+        public async Task CreateAsync(string name,
             string email,
             string imageURL,
             string speciality,
@@ -39,10 +39,6 @@
             var department = await this.db.Departments
                    .Where(d => d.Name == departmentName)
                    .FirstOrDefaultAsync();
-            if (department == null)
-            {
-                return false;
-            }
 
             var doctor = new Doctor
             {
@@ -52,10 +48,6 @@
                 Speciality = speciality,
                 Department = department
             };
-            if (doctor == null)
-            {
-                return false;
-            }
 
             db.Add(doctor);
             db.Departments
@@ -65,7 +57,6 @@
                 .Add(doctor);
 
             await db.SaveChangesAsync();
-            return true;
         }
 
         public async Task<DoctorViewModel> Details(int doctorId)

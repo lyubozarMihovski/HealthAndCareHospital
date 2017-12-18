@@ -1,16 +1,12 @@
 ﻿namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
 {
-    using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
-    [Area("Admin")]
-    [Authorize(Roles = WebConstants.AdministratorRole)]
-    public class DiseaseController : Controller
+    public class DiseaseController : BaseAdminController
     {
         private readonly IDepartmentService departmentService;
         private readonly IDiseaseService diseaseService;
@@ -40,21 +36,24 @@
                 return RedirectToAction(nameof(All));
             }
 
-            var diseases = await this.diseaseService.Search(model.SearchText);
+            var diseases = await this.diseaseService
+                .Search(model.SearchText);
 
             return View(diseases);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var diseaseExists = await this.diseaseService.DiseaseExists(id);
+            var diseaseExists = await this.diseaseService
+                .DiseaseExists(id);
 
             if (!diseaseExists)
             {
                 return NotFound();
             }
 
-            var diseaseView = await this.diseaseService.Details(id);
+            var diseaseView = await this.diseaseService
+                .Details(id);
 
             if (diseaseView == null)
             {
@@ -78,32 +77,32 @@
                 return View(model);
             }
 
-            var department = await this.departmentService.FindByName(model.DepartmentName);
+            var department = await this.departmentService
+                .FindByName(model.DepartmentName);
 
             if (department == null)
             {
                 return NotFound();
             }
 
-            var success = await this.diseaseService.Create(model.Name, model.Description, department);
-            if (!success)
-            {
-                return BadRequest();
-            }
+            await this.diseaseService
+                .Create(model.Name, model.Description, department);
 
             return RedirectToAction(nameof(All));
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var diseaseExists = await this.diseaseService.DiseaseExists(id);
+            var diseaseExists = await this.diseaseService
+                .DiseaseExists(id);
 
             if (!diseaseExists)
             {
                 return NotFound();
             }
 
-            var disease = await this.diseaseService.Details(id);
+            var disease = await this.diseaseService
+                .Details(id);
 
             if (disease == null)
             {
@@ -127,7 +126,8 @@
                 return NotFound();
             }
 
-            var disease = await this.diseaseService.DiseaseExists(id);
+            var disease = await this.diseaseService
+                .DiseaseExists(id);
 
             if (!disease)
             {
@@ -139,6 +139,7 @@
                 model.Name,
                 model.Description,
                 model.DepartmentName);
+
             if (!success)
             {
                 return BadRequest();
@@ -149,14 +150,16 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            var diseaseExists = await this.diseaseService.DiseaseExists(id);
+            var diseaseExists = await this.diseaseService
+                .DiseaseExists(id);
 
             if (!diseaseExists)
             {
                 return NotFound();
             }
 
-            var disease = this.diseaseService.Details(id);
+            var disease = this.diseaseService
+                .Details(id);
 
             return View(disease);
         }
@@ -165,14 +168,17 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var diseaseExists = await this.diseaseService.DiseaseExists(id);
+            var diseaseExists = await this.diseaseService
+                .DiseaseExists(id);
 
             if (!diseaseExists)
             {
                 return NotFound();
             }
 
-            var success = await this.diseaseService.Delete(id);
+            var success = await this.diseaseService
+                .Delete(id);
+
             if (!success)
             {
                 return BadRequest();

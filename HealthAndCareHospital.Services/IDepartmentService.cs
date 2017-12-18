@@ -7,7 +7,7 @@
 
     public interface IDepartmentService
     {
-        Task<bool> CreateAsync(string name, string description, string imageURL);
+        Task CreateAsync(string name, string description, string imageURL);
         IEnumerable<DepartmentViewModel> All();
         Task<bool> DepartmentExists(int id);
         Task<DepartmentCreateServiceModel> Details(int departmentId);

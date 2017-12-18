@@ -30,7 +30,7 @@
                .ToListAsync();
         }
 
-        public async Task<bool> Create(string name, string description, Department department)
+        public async Task Create(string name, string description, Department department)
         {
             var disease = new Disease
             {
@@ -40,17 +40,10 @@
                 Department = department
             };
 
-            if (disease == null)
-            {
-                return false;
-            }
-
             department.Diseases.Add(disease);
 
             this.db.Diseases.Add(disease);
             await this.db.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<bool> Delete(int id)

@@ -1,5 +1,6 @@
 ﻿namespace HealthAndCareHospital.Services.Implementations
 {
+    using AutoMapper.QueryableExtensions;
     using HealthAndCareHospital.Data;
     using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Services.Models.Doctor;
@@ -23,13 +24,7 @@
             return await this.db.Receipts
                .Where(r => r.Doctor.Email == email)
                .OrderByDescending(r => r.DateTime)
-               .Select(r => new ReceiptServiceModel
-               {
-                   Id = r.Id,
-                   PatientName = r.PatientName,
-                   DateTime = r.DateTime,
-                   DoctorId = r.DoctorId
-               })
+               .ProjectTo<ReceiptServiceModel>()
                .ToListAsync();
         }
 
@@ -37,13 +32,7 @@
         {
             return await this.db.Receipts
                .OrderByDescending(r => r.DateTime)
-               .Select(r => new ReceiptServiceModel
-               {
-                   Id = r.Id,
-                   PatientName = r.PatientName,
-                   DateTime = r.DateTime,
-                   DoctorId = r.DoctorId
-               })
+               .ProjectTo<ReceiptServiceModel>()
                .ToListAsync();
         }
 

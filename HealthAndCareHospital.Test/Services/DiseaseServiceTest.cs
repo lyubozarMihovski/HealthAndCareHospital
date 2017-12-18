@@ -1,16 +1,10 @@
 ﻿namespace HealthAndCareHospital.Test.Services
 {
-    using AutoMapper;
     using FluentAssertions;
-    using HealthAndCareHospital.Common.Infrastructure.Mapping;
-    using HealthAndCareHospital.Data;
     using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Services.Implementations;
-    using HealthAndCareHospital.Services.Models.Admin;
     using Microsoft.EntityFrameworkCore;
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -117,13 +111,10 @@
             var db = Tests.GetDatabase();
             var diseaseService = new DiseaseService(db);
             var department = new Department { Id = 1, Name = "Gosho" };
-            var result = await diseaseService.Create("Name", "Description", department);
+            await diseaseService.Create("Name", "Description", department);
 
             db.Diseases.Should()
-                .HaveCount(1);
-
-            result.Should()
-                .BeTrue();              
+                .HaveCount(1);              
         }
 
         [Fact]
@@ -132,7 +123,7 @@
             var db = Tests.GetDatabase();
             var diseaseService = new DiseaseService(db);
             var department = new Department { Id = 1, Name = "Gosho" };            
-            var result = await diseaseService.Create("Name", "Description", department);
+            await diseaseService.Create("Name", "Description", department);
             await db.SaveChangesAsync();
             var id = await db.Diseases
                 .Where(d => d.Name == "Name")
@@ -146,9 +137,6 @@
 
             db.Diseases.Should()
                 .HaveCount(1);
-
-            result.Should()
-                .BeTrue();
         }
     }
 }

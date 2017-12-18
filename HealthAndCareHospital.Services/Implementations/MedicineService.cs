@@ -41,14 +41,19 @@
             await this.db.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var medicine = await this.db.Medicines
                 .Where(m => m.Id == id)
                 .FirstOrDefaultAsync();
+            if (medicine == null)
+            {
+                return false;
+            }
 
             this.db.Remove(medicine);
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<MedicineServiceModel> Details(int id)
@@ -61,17 +66,22 @@
             return medicine;
         }
 
-        public async Task Edit(int id,string name, string dosage, string descritption)
+        public async Task<bool> Edit(int id,string name, string dosage, string descritption)
         {
             var medicine = await this.db.Medicines
                 .Where(m => m.Id == id)
                 .FirstOrDefaultAsync();
+            if (medicine == null)
+            {
+                return false;
+            }
 
             medicine.Name = name;
             medicine.Dosage = dosage;
             medicine.Descritption = descritption;
 
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<bool> MedicineExists(int id)

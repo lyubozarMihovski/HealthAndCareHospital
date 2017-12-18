@@ -1,16 +1,9 @@
 ﻿namespace HealthAndCareHospital.Test.Services
 {
-    using AutoMapper;
     using FluentAssertions;
-    using HealthAndCareHospital.Common.Infrastructure.Mapping;
-    using HealthAndCareHospital.Data;
-    using HealthAndCareHospital.Data.Models;
     using HealthAndCareHospital.Services.Implementations;
-    using HealthAndCareHospital.Services.Models.Admin;
     using Microsoft.EntityFrameworkCore;
-    using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Xunit;
 

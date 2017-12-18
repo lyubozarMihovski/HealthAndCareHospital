@@ -4,14 +4,11 @@
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Admin;
     using HealthAndCareHospital.Web.Areas.Admin.Models;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
-    [Area("Admin")]
-    [Authorize(Roles = WebConstants.AdministratorRole)]
-    public class MedicineController : Controller
+    public class MedicineController : BaseAdminController
     {
         int pageSize = WebConstants.PageSize;
         private readonly IMedicineService medicineService;
@@ -33,14 +30,16 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var medicineExists = await this.medicineService.MedicineExists(id);
+            var medicineExists = await this.medicineService
+                .MedicineExists(id);
 
             if (!medicineExists)
             {
                 return NotFound();
             }
 
-            var medicine = await this.medicineService.Details(id);
+            var medicine = await this.medicineService
+                .Details(id);
 
             return View(medicine);
         }
@@ -56,7 +55,9 @@
         {
             if (ModelState.IsValid)
             {
-                await this.medicineService.Create(model.Name, model.Dosage, model.Descritption);
+                await this.medicineService
+                    .Create(model.Name, model.Dosage, model.Descritption);
+   
                 return RedirectToAction(nameof(All));
             }
 
@@ -65,14 +66,16 @@
 
         public async Task<IActionResult> Edit(int id)
         {
-            var medicineExists = await this.medicineService.MedicineExists(id);
+            var medicineExists = await this.medicineService
+                .MedicineExists(id);
 
             if (!medicineExists)
             {
                 return NotFound();
             }
 
-            var medicineEdit = await this.medicineService.Details(id);
+            var medicineEdit = await this.medicineService
+                .Details(id);
 
             return View(medicineEdit);
         }
@@ -81,7 +84,8 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(MedicineServiceModel model)
         {
-            var medicineExists = await this.medicineService.MedicineExists(model.Id);
+            var medicineExists = await this.medicineService
+                .MedicineExists(model.Id);
 
             if (!medicineExists)
             {
@@ -93,20 +97,28 @@
                 return View(model);
             }
 
-            await this.medicineService.Edit(model.Id, model.Name, model.Dosage, model.Descritption);
+            var success = await this.medicineService
+                .Edit(model.Id, model.Name, model.Dosage, model.Descritption);
+
+            if (!success)
+            {
+                return BadRequest();
+            }
 
             return RedirectToAction(nameof(All));
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var medicineExists = await this.medicineService.MedicineExists(id);
+            var medicineExists = await this.medicineService
+                .MedicineExists(id);
 
             if (!medicineExists)
             {
                 return NotFound();
             }
 
-            var medicineDelete = await this.medicineService.Details(id);
+            var medicineDelete = await this.medicineService
+                .Details(id);
 
             return View(medicineDelete);
         }
@@ -115,14 +127,22 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var medicineExists = await this.medicineService.MedicineExists(id);
+            var medicineExists = await this.medicineService
+                .MedicineExists(id);
 
             if (!medicineExists)
             {
                 return NotFound();
             }
 
-            await this.medicineService.Delete(id);
+            var success = await this.medicineService
+                .Delete(id);
+
+            if (!success)
+            {
+                return BadRequest();
+            }
+
             return RedirectToAction(nameof(All));
         }
     }

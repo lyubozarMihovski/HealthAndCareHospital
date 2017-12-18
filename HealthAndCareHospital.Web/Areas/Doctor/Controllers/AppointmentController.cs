@@ -32,13 +32,13 @@
 
             if (this.User.IsInRole(WebConstants.AdministratorRole))
             {
-                var allReceipts = await this.appointmentService.All();
-                return View(allReceipts);
+                var allAppointments = await this.appointmentService.All();
+                return View(allAppointments);
             }
 
-            var receipts = await this.appointmentService.All(email);
+            var appointments = await this.appointmentService.All(email);
 
-            return View(receipts);
+            return View(appointments);
         }
 
         [Log]

@@ -1,15 +1,11 @@
 ﻿namespace HealthAndCareHospital.Web.Areas.Admin.Controllers
 {
-    using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Doctor;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
-    [Area("Admin")]
-    [Authorize(Roles = WebConstants.AdministratorRole)]
-    public class DoctorController : Controller
+    public class DoctorController : BaseAdminController
     {
         private readonly IDoctorService doctorService;
 
@@ -35,16 +31,12 @@
         {
             if (ModelState.IsValid)
             {
-                var success = await this.doctorService
+                await this.doctorService
                     .CreateAsync(model.Name,
                     model.Email,
                     model.ImageURL,
                     model.Speciality,
                     model.DepartmentName);
-                if (!success)
-                {
-                    return BadRequest();
-                }
 
                 return RedirectToAction(nameof(All));
             }
@@ -54,26 +46,30 @@
 
         public async Task<IActionResult> Details(int id)
         {
-            var doctor = await this.doctorService.DoctorExists(id);
+            var doctor = await this.doctorService
+                .DoctorExists(id);
 
             if (!doctor)
             {
                 return NotFound();
             }
-            var doc = await this.doctorService.Details(id);
+            var doc = await this.doctorService
+                .Details(id);
 
             return View(doc);
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var doctor = await this.doctorService.DoctorExists(id);
+            var doctor = await this.doctorService
+                .DoctorExists(id);
 
             if (!doctor)
             {
                 return NotFound();
             }
-            var doc = await this.doctorService.Details(id);
+            var doc = await this.doctorService
+                .Details(id);
 
             return View(doc);
         }
@@ -85,7 +81,8 @@
 
             if (ModelState.IsValid)
             {
-                var success = await this.doctorService.Edit(model.Id,
+                var success = await this.doctorService
+                    .Edit(model.Id,
                     model.Name,
                     model.Email,
                     model.ImageURL,
@@ -104,13 +101,16 @@
 
         public async Task<IActionResult> Delete(int id)
         {
-            var doctor = await this.doctorService.DoctorExists(id);
+            var doctor = await this.doctorService
+                .DoctorExists(id);
 
             if (!doctor)
             {
                 return NotFound();
             }
-            var doc = await this.doctorService.Details(id);
+            var doc = await this.doctorService
+                .Details(id);
+
             return View(doc);
         }
 
@@ -118,13 +118,16 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doctor = await this.doctorService.DoctorExists(id);
+            var doctor = await this.doctorService
+                .DoctorExists(id);
 
             if (!doctor)
             {
                 return NotFound();
             }
-            var success = await this.doctorService.Delete(id);
+            var success = await this.doctorService
+                .Delete(id);
+
             if (!success)
             {
                 return BadRequest();
@@ -152,14 +155,17 @@
         [HttpPost]
         public async Task<IActionResult> SetToRole(DoctorIdNameModel model)
         {
-            var doctor = await this.doctorService.DoctorExists(model.Id);
+            var doctor = await this.doctorService
+                .DoctorExists(model.Id);
 
             if (!doctor)
             {
                 return NotFound();
             }
 
-            var success =  await this.doctorService.SetToRoleAsync(model.Id);
+            var success =  await this.doctorService
+                .SetToRoleAsync(model.Id);
+
             if (success)
             {
                 TempData["Message"] = $"This {model.Name} doctor was set in Doctor role";

@@ -1,7 +1,5 @@
 ﻿using FluentAssertions;
-using HealthAndCareHospital.Data.Models;
 using HealthAndCareHospital.Services.Implementations;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,14 +15,11 @@ namespace HealthAndCareHospital.Test.Services
             var db = Tests.GetDatabase();
             var doctorService = new DoctorService(db, null);
             var departmentService = new DepartmentService(db);
-            var department = await departmentService.CreateAsync("Cardiology", "Gosho", "SomeURL");
+            await departmentService.CreateAsync("Cardiology", "Gosho", "SomeURL");
             await db.SaveChangesAsync();
-            var result = await doctorService.CreateAsync(
+            await doctorService.CreateAsync(
                 "Gosho","email@email.bg", "SomeURL", "Cardiologist", "Cardiology");
             await db.SaveChangesAsync();
-
-            result.Should()
-                .Be(true);
 
             db.Doctors.Should()
                 .HaveCount(1);
@@ -36,9 +31,9 @@ namespace HealthAndCareHospital.Test.Services
             var db = Tests.GetDatabase();
             var doctorService = new DoctorService(db, null);
             var departmentService = new DepartmentService(db);
-            var department = await departmentService.CreateAsync("Cardiology", "Gosho", "SomeURL");
+            await departmentService.CreateAsync("Cardiology", "Gosho", "SomeURL");
             await db.SaveChangesAsync();
-            var result = await doctorService.CreateAsync(
+            await doctorService.CreateAsync(
                 "Gosho", "email@email.bg", "SomeURL", "Cardiologist", "Cardiology");
             await db.SaveChangesAsync();
             var id = await db.Doctors
@@ -52,22 +47,19 @@ namespace HealthAndCareHospital.Test.Services
             edited.Should()
                 .BeTrue();
 
-            result.Should()
-                .Be(true);
-
             db.Doctors.Should()
                 .HaveCount(1);
         }
 
         [Fact]
-        public async Task DeletShouldReturnTrueAndProperCountOfDoctors()
+        public async Task DeleetShouldReturnTrueAndProperCountOfDoctors()
         {
             var db = Tests.GetDatabase();
             var doctorService = new DoctorService(db, null);
             var departmentService = new DepartmentService(db);
-            var department = await departmentService.CreateAsync("Cardiology", "Gosho", "SomeURL");
+            await departmentService.CreateAsync("Cardiology", "Gosho", "SomeURL");
             await db.SaveChangesAsync();
-            var result = await doctorService.CreateAsync(
+            await doctorService.CreateAsync(
                 "Gosho", "email@email.bg", "SomeURL", "Cardiologist", "Cardiology");
             await db.SaveChangesAsync();
             var id = await db.Doctors
@@ -79,9 +71,6 @@ namespace HealthAndCareHospital.Test.Services
 
             deleted.Should()
                 .BeTrue();
-
-            result.Should()
-                .Be(true);
 
             db.Doctors.Should()
                 .HaveCount(1);

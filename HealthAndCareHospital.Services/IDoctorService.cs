@@ -7,7 +7,7 @@
 
     public interface IDoctorService
     {
-        Task<bool> CreateAsync(string name, string email, string imageURL, string speciality, string departmentName);
+        Task CreateAsync(string name, string email, string imageURL, string speciality, string departmentName);
         Task<IEnumerable<DoctorViewModel>> All();
         Task<Doctor> GetDoctorById(int id);
         Task<DoctorViewModel> Details(int doctorId);

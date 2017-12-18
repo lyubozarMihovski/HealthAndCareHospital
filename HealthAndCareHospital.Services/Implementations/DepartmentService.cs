@@ -39,7 +39,7 @@
             .ToList();
         }
 
-        public async Task<bool> CreateAsync(string name, string description, string imageURL)
+        public async Task CreateAsync(string name, string description, string imageURL)
         {
            var department = new Department
             {
@@ -47,14 +47,9 @@
                 Description = description,
                 ImageURL = imageURL
             };
-            if(department == null)
-            {
-                return false;
-            }
 
             this.db.Add(department);
             await this.db.SaveChangesAsync();
-            return true;
         }
 
         public async Task<bool> Delete(int id)

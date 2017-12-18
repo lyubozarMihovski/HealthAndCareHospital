@@ -57,14 +57,19 @@
             return true;
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var patient = await this.db.Patients
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
+            if (patient == null)
+            {
+                return false;
+            }
 
             this.db.Remove(patient);
             await this.db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<PatientServiceModel> Details(int id)
