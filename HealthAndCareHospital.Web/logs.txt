@@ -55,3 +55,5 @@
 18.12.2017 г. 12:55:22 ::1 - admin@admin.bg - AppointmentController.All
 18.12.2017 г. 13:03:31 ::1 - admin@admin.bg - AppointmentController.All
 18.12.2017 г. 13:06:15 ::1 - admin@admin.bg - AppointmentController.All
+19.12.2017 г. 9:20:29 ::1 - admin@admin.bg - AppointmentController.All
+19.12.2017 г. 9:20:33 ::1 - admin@admin.bg - AppointmentController.All
