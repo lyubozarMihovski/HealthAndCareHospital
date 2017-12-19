@@ -42,6 +42,40 @@
         }
 
         [Log]
+        public async Task<IActionResult> Archive()
+        {
+            var user = await this.userManager.GetUserAsync(User);
+            var email = user.Email;
+
+            if (this.User.IsInRole(WebConstants.AdministratorRole))
+            {
+                var allAppointments = await this.appointmentService.All();
+                return View(allAppointments);
+            }
+
+            var appointments = await this.appointmentService.All(email);
+
+            return View(appointments);
+        }
+
+        [Log]
+        public async Task<IActionResult> New()
+        {
+            var user = await this.userManager.GetUserAsync(User);
+            var email = user.Email;
+
+            if (this.User.IsInRole(WebConstants.AdministratorRole))
+            {
+                var allAppointments = await this.appointmentService.All();
+                return View(allAppointments);
+            }
+
+            var appointments = await this.appointmentService.All(email);
+
+            return View(appointments);
+        }
+
+        [Log]
         public async Task<IActionResult> Delete(int id)
         {
             var receiptExists = await this.appointmentService.AppointmentExists(id);

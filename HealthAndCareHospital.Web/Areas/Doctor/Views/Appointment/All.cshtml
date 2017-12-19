@@ -6,8 +6,11 @@
 
 <h2>@ViewData["Title"]</h2>
 <br>
-<h2>New Appointments</h2>
-<div class="container-fluid col-md-6">
+<p>
+    <a class="btn btn-primary" asp-action="New">New Appointments</a>
+    <a class="btn btn-primary" asp-action="Archive">Appointments Archive</a>
+</p>
+<br>
 <table class="table white">
     <thead>
         <tr>
@@ -17,19 +20,18 @@
                 <th>
                     @Html.DisplayNameFor(model => model.DateTime)
                 </th>
-            @if (this.User.IsInRole("Administrator"))
-            {
-                <th>
-                    Doctor
-                </th>
-            }
+                @if (this.User.IsInRole("Administrator"))
+                {
+                    <th>
+                        Doctor
+                    </th>
+                }
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-    @if (item.DateTime > DateTime.UtcNow)
-    {
+@foreach (var item in Model)
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PatientName)
@@ -48,57 +50,6 @@
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-        }
-    }
+}
     </tbody>
 </table>
-    </div>
-<br>
-<h2>Archive</h2>
-<div class="container-fluid col-md-6">
-    <table class="table white">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.PatientName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateTime)
-                </th>
-                @if (this.User.IsInRole("Administrator"))
-            {
-                    <th>
-                        Doctor
-                    </th>
-                }
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                @if (item.DateTime < DateTime.UtcNow)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.PatientName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateTime)
-                        </td>
-                        @if (this.User.IsInRole("Administrator"))
-                    {
-                            <td>
-                                <a class="btn btn-primary" asp-area="" asp-controller="Departments"
-                                   asp-action="DoctorDetails" asp-route-id="@item.DoctorId">Doctor</a>
-                            </td>
-                        }
-                        <td>
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-</div>

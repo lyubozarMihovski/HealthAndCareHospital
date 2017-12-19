@@ -27,7 +27,7 @@
                 .ToListAsync();
         }
 
-        public async Task<bool> CreateAsync(string name, string email, string subject, string message)
+        public async Task CreateAsync(string name, string email, string subject, string message)
         {
             var contact = new Contact
             {
@@ -36,14 +36,9 @@
                 Subject = subject,
                 Message = message
             };
-            if (contact == null)
-            {
-                return false;
-            }
 
             this.db.Contacts.Add(contact);
             await this.db.SaveChangesAsync();
-            return true;
         }
 
         public async Task<ContactFormServiceModel> CreateModelAsync(int id)

@@ -10,6 +10,7 @@
     {
         public int Id { get; set; }
 
+        [Display(Name = "Patient Name")]
         public string PatientName { get; set; }
 
         [Display(Name = "Appointment date and hour")]

@@ -43,27 +43,6 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
     <a class="btn btn-primary" asp-action="All">Back to List</a>
 </div>
-<section id="doctor-team" class="section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h2 class="ser-title">Meet Our Doctors!</h2>
-                <hr class="botm-line">
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="thumbnail">
-                    <img src="@Model.ImageURL" alt="..." class="team-img">
-                    <div class="caption">
-                        <h3>@Model.Name</h3>
-                        <p>@Model.Speciality</p>
-                        <p>@Model.Email</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>

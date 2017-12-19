@@ -28,25 +28,25 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="#"><img src="~/Medilab/img/logo.png" class="img-responsive" style="width: 140px; margin-top: -16px;"></a>
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Medilab/img/logo.png" class="img-responsive" style="width: 140px; margin-top: -16px;"></a>
                         </div>
                         <div class="collapse navbar-collapse navbar-right" id="myNavbar">
                             <ul class="nav navbar-nav">
                                 @if (this.User.IsInRole("Administrator"))
                                 {
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                                     <li class="active"><a asp-area="Admin" asp-controller="Department" asp-action="All">Departments</a></li>
                                     <li class="active"><a asp-area="Admin" asp-controller="Doctor" asp-action="All">Doctors</a></li>
                                     <li class="active"><a asp-area="Admin" asp-controller="Disease" asp-action="All">Diseases</a></li>
                                     <li class="active"><a asp-area="Admin" asp-controller="Medicine" asp-action="All">Medicines</a></li>
                                     <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="All">Patients</a></li>
+                                    <li class="active"><a asp-area="Doctor" asp-controller="Appointment" asp-action="All">Appointments</a></li>
                                     <li class="active"><a asp-area="Contact" asp-controller="Contact" asp-action="All">Contacts</a></li>
                                 }
                                 @if (this.User.IsInRole("Doctor"))
                                 {
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Diseases" asp-action="All">Diseases</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Medicines" asp-action="All">Medicines</a></li>
                                     <li class="active"><a asp-area="Doctor" asp-controller="Patient" asp-action="All">Patients</a></li>
                                     <li class="active"><a asp-area="Doctor" asp-controller="Appointment" asp-action="All">Appointments</a></li>
                                     <li class="active"><a asp-area="Contact" asp-controller="Contact" asp-action="All">Contacts</a></li>
@@ -54,9 +54,9 @@
                                 @if (this.User.Identity.IsAuthenticated && !this.User.IsInRole("Administrator") && !this.User.IsInRole("Doctor"))
                                 {
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Department" asp-action="All">Departments</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Disease" asp-action="All">Diseases</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Medicine" asp-action="All">Medicines</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Departments" asp-action="All">Departments</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Diseases" asp-action="All">Diseases</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Medicines" asp-action="All">Medicines</a></li>
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                                     <li class="active"><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                                 }
@@ -94,7 +94,7 @@
                             <h4 class="white no-padding">About Us</h4>
                         </div>
                         <div class="info-sec">
-                            <p>Praesent convallis tortor et enim laoreet, vel consectetur purus latoque penatibus et dis parturient.</p>
+                            <p>The hospital with a multidisciplinary approach, latest technology and great expertise, the 100-bedded unit including a 50 bedded surgical unit in the main hospital is geared up to be the ultimate destination of health care in Sofia.</p>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 marb20">
@@ -105,7 +105,7 @@
                             <ul class="quick-info">
                                 <li><a href="#"><i class="fa fa-circle"></i>Home</a></li>
                                 <li><a href="/departments/all"><i class="fa fa-circle"></i>Services</a></li>
-                                <li><a href="/home/contact"><i class="fa fa-circle"></i>Appointment</a></li>
+                                <li><a href="/home/contact"><i class="fa fa-circle"></i>Contact</a></li>
                             </ul>
                         </div>
                     </div>

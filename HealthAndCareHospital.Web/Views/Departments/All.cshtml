@@ -21,7 +21,7 @@
                         <img src="@department.ImageURL" alt="..." class="team-img">
                         <div class="caption">
                             <h3>@department.Name</h3>
-                            <p>@(department.Description.Substring(0 , 20))...</p>
+                            <p>@department.Description</p>
                             <h4 class="text-left">Doctors:</h4>
                             @foreach (var doctor in department.Doctors)
                             {

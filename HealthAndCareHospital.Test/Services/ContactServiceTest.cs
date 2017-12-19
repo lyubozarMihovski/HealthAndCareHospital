@@ -14,13 +14,10 @@
         {
             var db = Tests.GetDatabase();
             var contactService = new ContactService(db);
-            var result = await contactService.CreateAsync("Chicho",
+            await contactService.CreateAsync("Chicho",
                 "chicho@gosho.bg",
                 "Bolen sum" ,
                 "Boli meeeeeeeee");
-
-            result.Should()
-                .BeTrue();
 
             db.Contacts.Should()
                 .HaveCount(1);
@@ -31,7 +28,7 @@
         {
             var db = Tests.GetDatabase();
             var contactService = new ContactService(db);
-            var result = await contactService.CreateAsync("Chicho",
+            await contactService.CreateAsync("Chicho",
                 "chicho@gosho.bg",
                 "Bolen sum",
                 "Boli meeeeeeeee");
@@ -42,9 +39,6 @@
                 .FirstOrDefaultAsync();
             var deleted = await contactService.DeleteAsync(id);
             await db.SaveChangesAsync();
-
-            result.Should()
-                .BeTrue();
 
             deleted.Should()
                 .BeTrue();

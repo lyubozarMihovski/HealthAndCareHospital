@@ -9,7 +9,7 @@
     {
         Task<IEnumerable<ContactFormServiceModel>> All();
         Task<Contact> FindByIdAsync(int id);
-        Task<bool> CreateAsync(string name, string email, string subject, string message);
+        Task CreateAsync(string name, string email, string subject, string message);
         Task<bool> DeleteAsync(int id);
         Task<ContactFormServiceModel> CreateModelAsync(int id);
     }

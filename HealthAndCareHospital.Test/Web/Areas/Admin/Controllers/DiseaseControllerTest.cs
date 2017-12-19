@@ -2,15 +2,10 @@
 {
     using FluentAssertions;
     using HealthAndCareHospital.Common;
-    using HealthAndCareHospital.Data.Models;
-    using HealthAndCareHospital.Services;
-    using HealthAndCareHospital.Services.Models.Admin;
     using HealthAndCareHospital.Web.Areas.Admin.Controllers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Moq;
     using System.Linq;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class DiseaseControllerTest

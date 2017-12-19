@@ -47,7 +47,6 @@
             <th>
                 Descritption
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -63,10 +62,6 @@
                 <td>
                     @(item.Descritption.Substring(0, 10))...
                     <a class="btn btn-default" asp-action="Details" asp-route-id="@item.Id">Read More</a>
-                </td>
-                <td>
-                    <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
