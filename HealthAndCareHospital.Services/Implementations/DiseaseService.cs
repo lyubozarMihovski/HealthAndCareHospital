@@ -50,6 +50,7 @@
         {
             var disease = await db.Diseases
                 .SingleOrDefaultAsync(m => m.Id == id);
+
             if (disease == null)
             {
                 return false;

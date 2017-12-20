@@ -158,7 +158,7 @@
                 return NotFound();
             }
 
-            var disease = this.diseaseService
+            var disease = await this.diseaseService
                 .Details(id);
 
             return View(disease);
