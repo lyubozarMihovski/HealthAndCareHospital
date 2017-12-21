@@ -11,6 +11,6 @@
         public const string AdminArea = "Admin";
         public const string DoctorArea = "Doctor";
 
-        public const int PageSize = 2;
+        public const int PageSize = 5;
     }
 }

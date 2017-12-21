@@ -37,7 +37,6 @@
             return View(departmentDetails);
         }
 
-        [Authorize]
         public async Task<IActionResult> DoctorDetails(int id)
         {
             var doctor = await this.doctorService.DoctorExists(id);
@@ -46,6 +45,7 @@
             {
                 return NotFound();
             }
+
             var doc = await this.doctorService.Details(id);
 
             return View(doc);

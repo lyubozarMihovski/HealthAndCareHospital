@@ -41,7 +41,8 @@
                     @Html.DisplayFor(modelItem => disease.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => disease.Description)
+                    @disease.Description.Substring(0,15)...
+                    <a class="btn btn-default" asp-controller="Diseases" asp-action="Details" asp-route-id="@disease.Id"> Read More</a>
                 </td>
                 <td>
                     <a class="btn btn-default" href="/departments/all/">@disease.DepartmentName</a>
