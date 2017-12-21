@@ -11,7 +11,7 @@
     public class DepartmentServiceTest
     {
         [Fact]
-        public async Task CreateAsyncShouldReturnTrueAndNewDepartment()
+        public async Task CreateAsyncShouldReturnNewDepartment()
         {
             var db = Tests.GetDatabase();
             var departmentService = new DepartmentService(db);

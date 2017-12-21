@@ -1,10 +1,11 @@
-﻿namespace HealthAndCareHospital.Test.Web.Areas.Contact.Controllers
+﻿namespace HealthAndCareHospital.Test.Web.Areas.Doctor.Controllers
 {
     using FluentAssertions;
     using HealthAndCareHospital.Common;
     using HealthAndCareHospital.Common.Areas.Contact.Controllers;
     using HealthAndCareHospital.Services;
     using HealthAndCareHospital.Services.Models.Contact;
+    using HealthAndCareHospital.Web.Areas.Doctor.Controllers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -13,13 +14,13 @@
     using System.Threading.Tasks;
     using Xunit;
 
-    public class ContactControllerTest
+    public class PatientControllerTest
     {
         [Fact]
-        public void ContactControllerShoulBeOnlyForAdminAndDoctorUser()
+        public void PatientControllerShoulBeOnlyForAdminAndDoctorUser()
         {
             //Arrange
-            var controller = typeof(ContactController);
+            var controller = typeof(PatientController);
 
             //Act
             var areaAttribute = controller
@@ -36,7 +37,7 @@
         public void GetCreateShouldReturnView()
         {
             //Arrange
-            var controller = new ContactController(null);
+            var controller = new PatientController(null, null);
 
             // Act
             var result = controller.Create();
@@ -84,7 +85,7 @@
 
             var controller = new ContactController(contactService.Object);
             controller.TempData = tempData.Object;
-          
+
             // Act
             var result = await controller.Create(new ContactFormServiceModel
             {
@@ -104,3 +105,4 @@
         }
     }
 }
+

@@ -70,6 +70,7 @@
             {
                 return BadRequest();
             }
+
             return RedirectToAction(nameof(All));
         }
 

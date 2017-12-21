@@ -52,7 +52,7 @@ namespace HealthAndCareHospital.Test.Services
         }
 
         [Fact]
-        public async Task DeleetShouldReturnTrueAndProperCountOfDoctors()
+        public async Task DeleteShouldReturnTrueAndProperCountOfDoctors()
         {
             var db = Tests.GetDatabase();
             var doctorService = new DoctorService(db, null);

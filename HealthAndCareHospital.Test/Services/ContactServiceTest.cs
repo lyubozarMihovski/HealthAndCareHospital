@@ -10,7 +10,7 @@
     public class ContactServiceTest
     {
         [Fact]
-        public async Task CreateAsyncShouldReturnTrueAndNewContact()
+        public async Task CreateAsyncShouldReturnNewContact()
         {
             var db = Tests.GetDatabase();
             var contactService = new ContactService(db);
